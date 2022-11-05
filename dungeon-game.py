@@ -11,8 +11,8 @@ class Player:
     self.x = 0
     self.y = 0
     self.speed = 1
-    self.width = 3
-    self.height = 3
+    self.width = 4
+    self.height = 4
 
   def draw(self):
     pyxel.rect(self.x - self.width / 2, self.y - self.height / 2, self.width, self.height, 5)
@@ -27,22 +27,22 @@ class App:
 
     self.map = Map(GAME_WIDTH, GAME_HEIGHT, TILE_WIDTH)
 
-    self.map.load_map([["FWT",   "FWT", "FWR"], 
-                       ["F",   "F", "FWR"], 
-                       ["FWB", "FWB", "FWR"]])
+    self.map.load_map([["F,WT,WL",   "F,WT", "F,WR,WT"], 
+                       ["F,WL",         "F,WB",    "F,WR"], 
+                       ["F,WB,WL",  "F,WB,WT", "F,WR,WB"]])
 
 
     # create random map for testing
     tile_types = ["F", "FWR", "FWB", "FWT", "FWL"]
-    for row_index in range(len(self.map.tiles)):
-      for col_index in range(len(self.map.tiles[row_index])):
-        self.map.tiles[row_index][col_index] = self.map.create_tile(tile_types[r.randrange(0, len(tile_types))], row_index, col_index)
+    # for row_index in range(len(self.map.tiles)):
+    #   for col_index in range(len(self.map.tiles[row_index])):
+    #     self.map.tiles[row_index][col_index] = self.map.create_tile(tile_types[r.randrange(0, len(tile_types))], row_index, col_index)
       
     pyxel.init(GAME_WIDTH, GAME_HEIGHT, title="Dungeon Game")
     pyxel.run(self.update, self.draw)
 
   def update(self):
-    player_collision = self.map.get_tile(self.player.x, self.player.y).collision(self.player.x % TILE_WIDTH, self.player.y % TILE_WIDTH)
+    player_collision = self.map.get_tile(self.player.x, self.player.y).collision(self.player.x % TILE_WIDTH, self.player.y % TILE_WIDTH, self.player.width, self.player.height)
     #print(player_collision)
     player_movement = [0,0]
     if pyxel.btnp(pyxel.KEY_Q):

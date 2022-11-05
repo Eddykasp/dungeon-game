@@ -30,16 +30,22 @@ class Map:
       return Tile(row_index, col_index)
     elif tile_id == "F":
       return Floor(row_index, col_index)
-    elif tile_id == "FWR":
-      return FloorWallRight(row_index, col_index)
-    elif tile_id == "FWL":
-      return FloorWallLeft(row_index, col_index)
-    elif tile_id == "FWB":
-      return FloorWallBottom(row_index, col_index)
-    elif tile_id == "FWT":
-      return FloorWallTop(row_index, col_index)
+    elif tile_id == "WR":
+      return WallRight(row_index, col_index)
+    elif tile_id == "WL":
+      return WallLeft(row_index, col_index)
+    elif tile_id == "WB":
+      return WallBottom(row_index, col_index)
+    elif tile_id == "WT":
+      return WallTop(row_index, col_index)
+    else:
+      return Tile(row_index, col_index)
 
   def load_map(self,map_spec):
     for col_index in range(len(map_spec)):
       for row_index in range(len(map_spec[col_index])):
-        self.tiles[row_index][col_index] = self.create_tile(map_spec[col_index][row_index], row_index, col_index)
+        tile_spec = map_spec[col_index][row_index].split(",")
+        tile_stack_list = []
+        for tile in tile_spec:
+          tile_stack_list.append(self.create_tile(tile, row_index, col_index))
+        self.tiles[row_index][col_index] = TileStack(row_index, col_index, tile_stack_list)
