@@ -3,8 +3,9 @@ from tiles import *
 from map import *
 import random as r
 
-GAME_WIDTH = 260
-GAME_HEIGHT = 120
+GAME_WIDTH = 400
+GAME_HEIGHT = 300
+image = None
 
 class Player:
   def __init__(self):
@@ -38,7 +39,8 @@ class App:
     #   for col_index in range(len(self.map.tiles[row_index])):
     #     self.map.tiles[row_index][col_index] = self.map.create_tile(tile_types[r.randrange(0, len(tile_types))], row_index, col_index)
       
-    pyxel.init(GAME_WIDTH, GAME_HEIGHT, title="Dungeon Game")
+    pyxel.init(GAME_WIDTH, GAME_HEIGHT, title="Dungeon Game", display_scale=3)
+
     pyxel.run(self.update, self.draw)
 
   def update(self):
@@ -63,5 +65,8 @@ class App:
     self.map.draw()
 
     self.player.draw()
+    pyxel.load("./assets/test_wall.pyxres", image=True)
+    pyxel.blt(0,0,pyxel.image(0),0,0,10,10)
+    #pyxel.image(0).load(0,0,"./assets/test_wall.pyxres")
 
 App()
