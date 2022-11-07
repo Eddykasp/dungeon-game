@@ -40,7 +40,8 @@ class App:
     #     self.map.tiles[row_index][col_index] = self.map.create_tile(tile_types[r.randrange(0, len(tile_types))], row_index, col_index)
       
     pyxel.init(GAME_WIDTH, GAME_HEIGHT, title="Dungeon Game", display_scale=3)
-
+    # load resource file
+    pyxel.load("./assets/test_wall.pyxres", image=True)
     pyxel.run(self.update, self.draw)
 
   def update(self):
@@ -65,7 +66,6 @@ class App:
     self.map.draw()
 
     self.player.draw()
-    pyxel.load("./assets/test_wall.pyxres", image=True)
     pyxel.blt(0,0,pyxel.image(0),0,0,10,10)
     #pyxel.image(0).load(0,0,"./assets/test_wall.pyxres")
 
