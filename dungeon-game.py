@@ -3,8 +3,8 @@ from tiles import *
 from map import *
 import random as r
 
-GAME_WIDTH = 160
-GAME_HEIGHT = 112
+GAME_WIDTH = 160 # 20 Tiles 
+GAME_HEIGHT = 112 # 14 Tiles
 
 class Player:
   def __init__(self):
@@ -27,8 +27,8 @@ class App:
 
     self.map = Map(GAME_WIDTH, GAME_HEIGHT, TILE_WIDTH)
 
-    self.map.load_map([["F,WT,WL",   "F,WT", "F,WR,WT"], 
-                       ["F,WL",         "F,WB",    "F,WR"], 
+    self.map.load_map([["F,WT,WL",  "F,WT",    "F,WR,WT"], 
+                       ["F,WL",     "F,WB",    "F,WR"], 
                        ["F,WB,WL",  "F,WB,WT", "F,WR,WB"]])
 
 
