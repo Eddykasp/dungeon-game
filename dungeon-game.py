@@ -1,5 +1,6 @@
 import pyxel
 from tiles import *
+from logicTiles import *
 from map import *
 import random as r
 
@@ -27,9 +28,9 @@ class App:
 
     self.map = Map(GAME_WIDTH, GAME_HEIGHT, TILE_WIDTH)
 
-    self.map.load_map([["F,WT,WL",  "F,WT",    "F,WR,WT"], 
-                       ["F,WL",     "F,WB",    "F,WR"], 
-                       ["F,WB,WL",  "F,WB,WT", "F,WR,WB"]])
+    self.map.load_map([["F,WT,WL",  "F,PP_0>A_0,WT",    "F,WR,WT"], 
+                       ["F,WL",     "F,WB",             "F,WR"], 
+                       ["F,WB,WL",  "F,WB,WT",          "F,A_0,WR,WB"]])
 
 
     # create random map for testing
@@ -40,7 +41,7 @@ class App:
       
     pyxel.init(GAME_WIDTH, GAME_HEIGHT, title="Dungeon Game", display_scale=8)
     # load resource file
-    pyxel.load("./assets/dungeon_assets.pyxres", image=True)
+    pyxel.load("./assets/dungeon_assets.pyxres", image=True, sound=True)
     pyxel.run(self.update, self.draw)
 
   def update(self):
@@ -59,6 +60,8 @@ class App:
       player_movement[1] = 1
 
     self.player.move(player_movement, player_collision)
+
+    self.map.evaluateLogic()
 
   def draw(self):
     pyxel.cls(0)

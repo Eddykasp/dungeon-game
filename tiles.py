@@ -4,14 +4,19 @@ TILE_WIDTH = 8
 
 class Tile:
   imageId = 0 # all tiles saved on image 0
-  imageX = 2 # empty tile marker
-  imageY = 1
+  imageX = [2] # empty tile marker
+  imageY = [1]
+  state = 0
+  
   def __init__(self, x, y):
     self.x = x
     self.y = y
 
   def draw(self):    
-    pyxel.blt(self.x* TILE_WIDTH,self.y* TILE_WIDTH,pyxel.image(self.imageId),self.imageX * TILE_WIDTH,self.imageY * TILE_WIDTH,TILE_WIDTH,TILE_WIDTH,0)
+    pyxel.blt(self.x* TILE_WIDTH,self.y* TILE_WIDTH,
+      pyxel.image(self.imageId),
+      self.imageX[self.state] * TILE_WIDTH,
+      self.imageY[self.state] * TILE_WIDTH,TILE_WIDTH,TILE_WIDTH,0)
 
   """
   Returns an int pair to indicate the collision direction, to apply ontop of movement to undo it"""
@@ -40,15 +45,15 @@ class TileStack(Tile):
         
 
 class Floor(Tile):
-  imageX = 2
-  imageY = 0
+  imageX = [2]
+  imageY = [0]
 
 class Wall(Tile):
   thickness = 2
 
 class WallRight(Wall):
-  imageX = 0
-  imageY = 0
+  imageX = [0]
+  imageY = [0]
 
   def collision(self,sub_tile_x, sub_tile_y, width, height):
     if sub_tile_x + width / 2 > TILE_WIDTH - self.thickness:
@@ -57,8 +62,8 @@ class WallRight(Wall):
       return (0,0)
 
 class WallLeft(Wall):
-  imageX = 1
-  imageY = 1
+  imageX = [1]
+  imageY = [1]
   
   def collision(self,sub_tile_x, sub_tile_y, width, height):
     if sub_tile_x - width / 2 < self.thickness:
@@ -67,8 +72,8 @@ class WallLeft(Wall):
       return (0,0)
 
 class WallTop(Wall):
-  imageX = 0
-  imageY = 1
+  imageX = [0]
+  imageY = [1]
 
   def collision(self,sub_tile_x, sub_tile_y, width, height):
     if sub_tile_y - height / 2 < self.thickness:
@@ -77,8 +82,8 @@ class WallTop(Wall):
       return (0,0)
 
 class WallBottom(Wall):
-  imageX = 1
-  imageY = 0
+  imageX = [1]
+  imageY = [0]
 
   def collision(self,sub_tile_x, sub_tile_y, width, height):
     if sub_tile_y + height / 2 > TILE_WIDTH - self.thickness:

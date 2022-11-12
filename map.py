@@ -1,4 +1,5 @@
 from tiles import *
+from logicTiles import *
 
 """
 A grid containing the map tiles. The tile of certain coordinates can be accessed using the map.
@@ -6,9 +7,7 @@ A grid containing the map tiles. The tile of certain coordinates can be accessed
 class Map:
   def __init__(self, width, height, tile_width):
     self.tiles = [[Tile(col_index, row_index) for row_index in range(int(height / tile_width))] for col_index in range(int(width / tile_width))]
-    #print(len(self.tiles))
-
-    #self.tiles[3][5].color = 4
+    self.logicTiles = {}
 
   def draw(self):
     for row in self.tiles:
@@ -20,6 +19,17 @@ class Map:
       return self.tiles[int(x / TILE_WIDTH)][int(y / TILE_WIDTH)]
     except:
       return Tile(-1,-1)
+
+  def evaluateLogic(self):
+    for tileId in self.logicTiles:
+      logicTile = self.logicTiles[tileId]
+      if not isinstance(logicTile,Actuator) and logicTile.connectTo != "":
+        try:
+          # no sanity checking in logic network, if multiple things are hooked up
+          # to the same receiver, the last one wins
+          self.logicTiles[logicTile.connectTo].updateState(logicTile.outputSignal)
+        except:
+          print(logicTile.connectTo + " is not defined.")
 
 
   """
@@ -38,6 +48,18 @@ class Map:
       return WallBottom(row_index, col_index)
     elif tile_id == "WT":
       return WallTop(row_index, col_index)
+    elif tile_id.startswith("PP"):
+      pressurePlate = PressurePlate(row_index, col_index)
+      # TODO: refactor and extract this check to common place
+      if ">" in tile_id:
+        id, target = tile_id.split(">")
+        pressurePlate.connectTo = target
+      self.logicTiles[id] = pressurePlate
+      return pressurePlate
+    elif tile_id.startswith("A"):
+      actuator = Actuator(row_index, col_index)
+      self.logicTiles[tile_id] = actuator
+      return actuator
     else:
       return Tile(row_index, col_index)
 
