@@ -68,7 +68,7 @@ class Worm(Entity):
   speed = 0.5
 
   def draw(self):
-    if self.direction[0] != 0:
+    if self.direction[1] != 0:
       pyxel.rect(self.x - self.height / 2, self.y - self.width / 2, self.height, self.width, 4)
     else:
       pyxel.rect(self.x - self.width / 2, self.y - self.height / 2, self.width, self.height, 4)
