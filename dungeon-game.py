@@ -3,6 +3,7 @@ from tiles import *
 from logicTiles import *
 from map import *
 import random as r
+from entities import *
 
 GAME_WIDTH = 160 # 20 Tiles 
 GAME_HEIGHT = 112 # 14 Tiles
@@ -25,6 +26,9 @@ class Player:
 class App:
   def __init__(self):
     self.player = Player()
+    worm = Worm(5,5)
+
+    self.entities = [worm]
 
     self.map = Map(GAME_WIDTH, GAME_HEIGHT, TILE_WIDTH)
 
@@ -62,11 +66,21 @@ class App:
 
     self.player.move(player_movement, player_collision)
 
+    # update entities
+    for entity in self.entities:
+      if entity.wallCollider:
+        collision = self.map.get_tile(entity.x, entity.y).collision(entity.x % TILE_WIDTH, entity.y % TILE_WIDTH, entity.width, entity.height)
+        entity.update(collision)
+      else:
+        entity.update()
+
     self.map.evaluateLogic()
 
   def draw(self):
     pyxel.cls(0)
     self.map.draw()
+    for entity in self.entities:
+      entity.draw()
     self.player.draw()
 
 App()
