@@ -76,6 +76,9 @@ class Map:
     elif gate_id.startswith("OR"):
       orGate = Or(gate_id)
       self.id_to_connection(gate_id, orGate)
+    elif gate_id.startswith("NOT"):
+      notGate = Not(gate_id)
+      self.id_to_connection(gate_id, notGate)
     else:
       print(gate_id + " can't be parsed as a logic gate.")
 
