@@ -1,10 +1,19 @@
+from sqlite3 import connect
 import pyxel
 from tiles import *
 
 class Actuator(Tile):
   imageX = [3,4]
   imageY = [1,1]
+  name = "Actuator"
 
+  def __init__(self, x, y, name):
+      self.name = name
+      super().__init__(x,y)
+
+  def __str__(self):
+    return self.name + " [" + str(self.state) + "]"
+  
   def updateState(self, inputSignal):
     if inputSignal:
       self.state = 1
@@ -16,7 +25,15 @@ class Sensor(Tile):
   imageY = [0,0]
   sound = [0,0]
   outputSignal = False
-  connectTo = ""
+  connectTo = []
+  name = "Sensor"
+
+  def __init__(self,x,y,name):
+    self.name = name
+    super().__init__(x,y)
+
+  def __str__(self):
+    return self.name + " > " + str(self.connectTo)
 
   def activate(self):
     if (self.state == 0):

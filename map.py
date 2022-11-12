@@ -1,5 +1,7 @@
+from cmath import log
 from tiles import *
 from logicTiles import *
+from logicGates import *
 
 """
 A grid containing the map tiles. The tile of certain coordinates can be accessed using the map.
@@ -21,15 +23,23 @@ class Map:
       return Tile(-1,-1)
 
   def evaluateLogic(self):
+    #print("------------------")
     for tileId in self.logicTiles:
       logicTile = self.logicTiles[tileId]
-      if not isinstance(logicTile,Actuator) and logicTile.connectTo != "":
+      if isinstance(logicTile, LogicGate):
+        logicTile.resetTick()
+    for tileId in self.logicTiles:
+      logicTile = self.logicTiles[tileId]
+      if not isinstance(logicTile,Actuator):
         try:
           # no sanity checking in logic network, if multiple things are hooked up
           # to the same receiver, the last one wins
-          self.logicTiles[logicTile.connectTo].updateState(logicTile.outputSignal)
-        except:
-          print(logicTile.connectTo + " is not defined.")
+          for connection in logicTile.connectTo:
+            self.logicTiles[connection].updateState(logicTile.outputSignal)
+          #print(str(logicTile) + " " + str(logicTile.outputSignal) + " " + str(self.logicTiles[logicTile.connectTo]))
+        except Exception as error:
+          f = True
+          print(str(logicTile.connectTo) + " is not defined in " + str(logicTile))
 
 
   """
@@ -49,21 +59,38 @@ class Map:
     elif tile_id == "WT":
       return WallTop(row_index, col_index)
     elif tile_id.startswith("PP"):
-      pressurePlate = PressurePlate(row_index, col_index)
-      # TODO: refactor and extract this check to common place
-      if ">" in tile_id:
-        id, target = tile_id.split(">")
-        pressurePlate.connectTo = target
-      self.logicTiles[id] = pressurePlate
+      pressurePlate = PressurePlate(row_index, col_index, tile_id)
+      self.id_to_connection(tile_id, pressurePlate)
       return pressurePlate
     elif tile_id.startswith("A"):
-      actuator = Actuator(row_index, col_index)
+      actuator = Actuator(row_index, col_index, tile_id)
       self.logicTiles[tile_id] = actuator
       return actuator
     else:
       return Tile(row_index, col_index)
 
-  def load_map(self,map_spec):
+  def create_logic_gate(self, gate_id: str):
+    if gate_id.startswith("AND"):
+      andGate = And(gate_id)
+      self.id_to_connection(gate_id, andGate)
+    elif gate_id.startswith("OR"):
+      orGate = Or(gate_id)
+      self.id_to_connection(gate_id, orGate)
+    else:
+      print(gate_id + " can't be parsed as a logic gate.")
+
+  def id_to_connection(self,logic_id,gate_or_sensor):
+    if ">" in logic_id:
+      id, targets_str = logic_id.split(">")
+      targets = targets_str.split(";")
+      gate_or_sensor.connectTo = targets
+      self.logicTiles[id] = gate_or_sensor
+      gate_or_sensor.name = id
+    else:
+      self.logicTiles[logic_id] = gate_or_sensor
+    
+
+  def load_map(self,map_spec, logic_gates):
     for col_index in range(len(map_spec)):
       for row_index in range(len(map_spec[col_index])):
         tile_spec = map_spec[col_index][row_index].split(",")
@@ -71,3 +98,8 @@ class Map:
         for tile in tile_spec:
           tile_stack_list.append(self.create_tile(tile, row_index, col_index))
         self.tiles[row_index][col_index] = TileStack(row_index, col_index, tile_stack_list)
+    for gate in logic_gates:
+      self.create_logic_gate(gate)
+
+    # for logic in self.logicTiles:
+    #   print(self.logicTiles[logic])
