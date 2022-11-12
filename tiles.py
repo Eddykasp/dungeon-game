@@ -1,15 +1,17 @@
 import pyxel
 
-TILE_WIDTH = 20
+TILE_WIDTH = 8
 
 class Tile:
-  color = 1
+  imageId = 0 # all tiles saved on image 0
+  imageX = 2 # empty tile marker
+  imageY = 1
   def __init__(self, x, y):
     self.x = x
     self.y = y
 
-  def draw(self):
-    pyxel.rect(self.x * TILE_WIDTH, self.y * TILE_WIDTH, TILE_WIDTH, TILE_WIDTH, self.color)
+  def draw(self):    
+    pyxel.blt(self.x* TILE_WIDTH,self.y* TILE_WIDTH,pyxel.image(self.imageId),self.imageX * TILE_WIDTH,self.imageY * TILE_WIDTH,TILE_WIDTH,TILE_WIDTH,0)
 
   """
   Returns an int pair to indicate the collision direction, to apply ontop of movement to undo it"""
@@ -38,48 +40,48 @@ class TileStack(Tile):
         
 
 class Floor(Tile):
-  color = 2
+  imageX = 2
+  imageY = 0
 
 class Wall(Tile):
-  wall_color = 3
   thickness = 2
 
 class WallRight(Wall):
-  def draw(self):
-    pyxel.rect((self.x * TILE_WIDTH) + TILE_WIDTH - self.thickness, self.y * TILE_WIDTH, self.thickness, TILE_WIDTH, self.wall_color)
+  imageX = 0
+  imageY = 0
 
   def collision(self,sub_tile_x, sub_tile_y, width, height):
-    if sub_tile_x + width / 2 >= TILE_WIDTH - self.thickness:
+    if sub_tile_x + width / 2 > TILE_WIDTH - self.thickness:
       return (-1, 0)
     else:
       return (0,0)
 
 class WallLeft(Wall):
-  def draw(self):
-    pyxel.rect(self.x * TILE_WIDTH, self.y * TILE_WIDTH, self.thickness, TILE_WIDTH, self.wall_color)
+  imageX = 1
+  imageY = 1
   
   def collision(self,sub_tile_x, sub_tile_y, width, height):
-    if sub_tile_x - width / 2 <= self.thickness:
+    if sub_tile_x - width / 2 < self.thickness:
       return (1, 0)
     else:
       return (0,0)
 
 class WallTop(Wall):
-  def draw(self):
-    pyxel.rect(self.x * TILE_WIDTH, self.y * TILE_WIDTH, TILE_WIDTH, self.thickness, self.wall_color)
+  imageX = 0
+  imageY = 1
 
   def collision(self,sub_tile_x, sub_tile_y, width, height):
-    if sub_tile_y - height / 2 <= self.thickness:
+    if sub_tile_y - height / 2 < self.thickness:
       return (0, 1)
     else:
       return (0,0)
 
 class WallBottom(Wall):
-  def draw(self):
-    pyxel.rect(self.x * TILE_WIDTH, (self.y * TILE_WIDTH) + TILE_WIDTH - self.thickness, TILE_WIDTH, self.thickness, self.wall_color)
+  imageX = 1
+  imageY = 0
 
   def collision(self,sub_tile_x, sub_tile_y, width, height):
-    if sub_tile_y + height / 2 >= TILE_WIDTH - self.thickness:
+    if sub_tile_y + height / 2 > TILE_WIDTH - self.thickness:
       return (0, -1)
     else:
       return (0,0)
