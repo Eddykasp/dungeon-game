@@ -43,10 +43,15 @@ class App:
       
     pyxel.init(GAME_WIDTH, GAME_HEIGHT, title="Dungeon Game", display_scale=8)
     # load resource file
-    pyxel.load("./assets/dungeon_assets.pyxres", image=True, sound=True)
+    pyxel.load("./assets/dungeon_assets.pyxres", image=True, sound=True, music=True)
+    self.playingMusic = False
     pyxel.run(self.update, self.draw)
 
   def update(self):
+    if not self.playingMusic:
+      pyxel.playm(2,loop=True)
+      self.playingMusic = True
+
     player_collision = self.map.get_tile(self.player.x, self.player.y).collision(self.player.x % TILE_WIDTH, self.player.y % TILE_WIDTH, self.player.width, self.player.height)
     #print(player_collision)
     player_movement = [0,0]
@@ -62,6 +67,8 @@ class App:
       player_movement[1] = 1
 
     self.player.update(player_collision, player_movement)
+    # limited fov
+    pyxel.clip(self.player.x - 5, self.player.y - 5, 10, 10)
 
     # update entities
     for entity in self.entities:

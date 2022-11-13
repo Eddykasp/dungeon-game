@@ -39,7 +39,7 @@ class Sensor(Tile):
     if (self.state == 0):
       self.state = 1
       self.outputSignal = True
-      pyxel.play(0,self.sound)
+      pyxel.play(3,self.sound)
 
   def deactivate(self):
     if (self.state == 1):
