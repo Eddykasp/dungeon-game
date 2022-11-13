@@ -58,3 +58,59 @@ class PressurePlate(Sensor):
     else:
       self.deactivate()
     return (0,0)
+
+class DoorRight(Actuator, WallRight):
+  imageX = [0]
+  imageY = [0]
+
+  def collision(self, sub_tile_x, sub_tile_y, width, height):
+    if self.state == 0:
+      return super().collision(sub_tile_x, sub_tile_y, width, height)
+    else:
+      return [0,0]
+
+  def draw(self):
+    if self.state == 0:
+      super().draw()
+
+class DoorLeft(Actuator, WallLeft):
+  imageX = [1]
+  imageY = [1]
+
+  def collision(self, sub_tile_x, sub_tile_y, width, height):
+    if self.state == 0:
+      return super().collision(sub_tile_x, sub_tile_y, width, height)
+    else:
+      return [0,0]
+
+  def draw(self):
+    if self.state == 0:
+      super().draw()
+
+class DoorTop(Actuator, WallTop):
+  imageX = [0]
+  imageY = [1]
+
+  def collision(self, sub_tile_x, sub_tile_y, width, height):
+    if self.state == 0:
+      return super().collision(sub_tile_x, sub_tile_y, width, height)
+    else:
+      return [0,0]
+
+  def draw(self):
+    if self.state == 0:
+      super().draw()
+
+class DoorBottom(Actuator, WallBottom):
+  imageX = [1]
+  imageY = [0]
+
+  def collision(self, sub_tile_x, sub_tile_y, width, height):
+    if self.state == 0:
+      return super().collision(sub_tile_x, sub_tile_y, width, height)
+    else:
+      return [0,0]
+
+  def draw(self):
+    if self.state == 0:
+      super().draw()
