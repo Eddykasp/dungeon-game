@@ -66,6 +66,10 @@ class Map:
       actuator = Actuator(row_index, col_index, tile_id)
       self.logicTiles[tile_id] = actuator
       return actuator
+    elif tile_id.startswith("DR"):
+      door = DoorRight(row_index, col_index, tile_id)
+      self.id_to_connection(tile_id, door)
+      return door
     else:
       return Tile(row_index, col_index)
 
