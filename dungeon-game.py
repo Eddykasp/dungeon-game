@@ -18,10 +18,6 @@ class Player(Entity):
     self.wallCollider = True
     self.imageX = [2]
     self.imageY = [0]
-    
-  def move(self, movement, collision):
-    self.x += (movement[0] + collision[0]) * self.speed
-    self.y += (movement[1] + collision[1]) * self.speed
 
 class App:
   def __init__(self):
@@ -64,7 +60,7 @@ class App:
     if pyxel.btnp(pyxel.KEY_DOWN,hold=1,repeat=1) or pyxel.btnp(pyxel.KEY_S,hold=1,repeat=1):
       player_movement[1] = 1
 
-    self.player.move(player_movement, player_collision)
+    self.player.update(player_collision, player_movement)
 
     # update entities
     for entity in self.entities:

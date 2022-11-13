@@ -43,6 +43,7 @@ class Entity:
   width = 8
   height = 8
   wallCollider = False
+  renderDirection = 1
 
   def __init__(self,x,y):
     self.x = x
@@ -52,7 +53,7 @@ class Entity:
     pyxel.blt(self.x - self.width / 2, self.y - self.height / 2, 
       pyxel.image(self.imageId), self.imageX[self.state] * TILE_WIDTH,
       self.imageY[self.state]  * TILE_WIDTH,
-      self.width, self.height)
+      self.width * self.renderDirection, self.height)
 
   def move(self, movement):
     self.x += movement[0] * self.speed
@@ -62,6 +63,10 @@ class Entity:
     self.direction = newDirection
     self.move([self.direction[0] + collision[0], 
                self.direction[1] + collision[1]])
+    if self.direction[0] < 0:
+      self.renderDirection = -1
+    elif self.direction[0] > 0:
+      self.renderDirection = 1
 
 class Worm(Entity):
   width = 3
