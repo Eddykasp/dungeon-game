@@ -1,4 +1,3 @@
-from cmath import log
 from tiles import *
 from logicTiles import *
 from logicGates import *
@@ -98,7 +97,9 @@ class Map:
     elif gate_id.startswith("T"):
       timer = Timer(gate_id)
       self.id_to_connection(gate_id, timer)
-      
+    elif gate_id.startswith("DEL"):
+      delay = Delay(gate_id)
+      self.id_to_connection(gate_id, delay)
     else:
       print(gate_id + " can't be parsed as a logic gate.")
 

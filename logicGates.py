@@ -57,4 +57,16 @@ class Timer(LogicGate):
       # do nothing
       return
 
+class Delay(LogicGate):
+  delayLength = 5
+  def updateState(self, inputSignal):
+    if len(self.inputs) < self.delayLength:
+      self.inputs.append(inputSignal)
+    else:
+      self.outputSignal = self.inputs[0]
+      self.inputs = self.inputs[1:] + [inputSignal]
+
+  def resetTick(self):
+      return
+
   
