@@ -70,6 +70,18 @@ class Map:
       door = DoorRight(row_index, col_index, tile_id)
       self.id_to_connection(tile_id, door)
       return door
+    elif tile_id.startswith("DL"):
+      door = DoorLeft(row_index, col_index, tile_id)
+      self.id_to_connection(tile_id, door)
+      return door
+    elif tile_id.startswith("DT"):
+      door = DoorTop(row_index, col_index, tile_id)
+      self.id_to_connection(tile_id, door)
+      return door
+    elif tile_id.startswith("DB"):
+      door = DoorBottom(row_index, col_index, tile_id)
+      self.id_to_connection(tile_id, door)
+      return door
     else:
       return Tile(row_index, col_index)
 
@@ -83,6 +95,10 @@ class Map:
     elif gate_id.startswith("NOT"):
       notGate = Not(gate_id)
       self.id_to_connection(gate_id, notGate)
+    elif gate_id.startswith("T"):
+      timer = Timer(gate_id)
+      self.id_to_connection(gate_id, timer)
+      
     else:
       print(gate_id + " can't be parsed as a logic gate.")
 

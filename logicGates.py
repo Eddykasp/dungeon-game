@@ -1,7 +1,4 @@
 from functools import reduce
-from sqlite3 import connect
-from unicodedata import name
-import pyxel
 
 class LogicGate():
   inputs = []
@@ -37,5 +34,27 @@ class Not(LogicGate):
   def updateState(self, inputSignal):
       self.inputs = [inputSignal]
       self.outputSignal = not inputSignal
+
+# trigger an output signal after x ticks, reset if it receives an input signal
+class Timer(LogicGate):
+  timerResetCounter = 0
+  clockSpeed = 20
+  def updateState(self, inputSignal):
+    if self.timerResetCounter > 0:
+      self.timerResetCounter -= 1
+      return
+    if not inputSignal:
+      self.inputs.append(inputSignal)
+    elif inputSignal:
+      self.inputs = []
+    self.outputSignal = False
+    if len(self.inputs) > self.clockSpeed:
+      self.outputSignal = True
+      self.timerResetCounter = self.clockSpeed
+      self.inputs = []
+
+  def resetTick(self):
+      # do nothing
+      return
 
   

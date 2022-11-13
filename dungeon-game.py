@@ -32,10 +32,10 @@ class App:
 
     self.map = Map(GAME_WIDTH, GAME_HEIGHT, TILE_WIDTH)
 
-    self.map.load_map([["F,WT,WL",      "F,PP_0>OR_0;A_0;DR_0,WT",    "F,PP_1>OR_0;A_1,WR,WT"], 
+    self.map.load_map([["F,WT,WL",      "F,PP_0>OR_0;A_0;DR_0;T_0,WT",    "F,PP_1>OR_0;A_1,WR,WT"], 
                        ["F,WL",         "F,WB",                  "F,WR"], 
-                       ["F,A_0,WB,WL",  "F,A_1,WB,WT",           "F,A_2,DR_0,WB"]],
-                       ["AND_0", "OR_0>A_2"])
+                       ["F,A_0,WB,WL",  "F,A_1,WB,WT",           "F,A_2,DR_0,DB_0"]],
+                       ["AND_0", "OR_0>A_2","NOT_0>T_0", "T_0>DB_0"])
 
 
     # create random map for testing
