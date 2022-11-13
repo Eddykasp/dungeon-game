@@ -1,5 +1,6 @@
 import pyxel
 import random as r
+from tiles import TILE_WIDTH
 
 # UTILS
 def reverseDirection(direction):
@@ -48,8 +49,10 @@ class Entity:
     self.y = y
 
   def draw(self):
-    pyxel.blt(self.x, self.y, 
-      pyxel.image(self.imageId), self.imageX[self.state], self.imageY[self.state])
+    pyxel.blt(self.x - self.width / 2, self.y - self.height / 2, 
+      pyxel.image(self.imageId), self.imageX[self.state] * TILE_WIDTH,
+      self.imageY[self.state]  * TILE_WIDTH,
+      self.width, self.height)
 
   def move(self, movement):
     self.x += movement[0] * self.speed

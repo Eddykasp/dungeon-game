@@ -8,16 +8,16 @@ from entities import *
 GAME_WIDTH = 160 # 20 Tiles 
 GAME_HEIGHT = 112 # 14 Tiles
 
-class Player:
+class Player(Entity):
   def __init__(self):
     self.x = 0
     self.y = 0
     self.speed = 1
-    self.width = 6
-    self.height = 6
-
-  def draw(self):
-    pyxel.rect(self.x - self.width / 2, self.y - self.height / 2, self.width, self.height, 5)
+    self.width = 2
+    self.height = 4
+    self.wallCollider = True
+    self.imageX = [2]
+    self.imageY = [0]
     
   def move(self, movement, collision):
     self.x += (movement[0] + collision[0]) * self.speed
