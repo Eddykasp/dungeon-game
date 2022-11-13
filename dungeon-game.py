@@ -52,6 +52,14 @@ class App:
       pyxel.playm(2,loop=True)
       self.playingMusic = True
 
+    # update entities
+    for entity in self.entities:
+      if entity.wallCollider:
+        collision = self.map.get_tile(entity.x, entity.y).collision(entity.x % TILE_WIDTH, entity.y % TILE_WIDTH, entity.width, entity.height)
+        entity.update(collision)
+      else:
+        entity.update()
+
     player_collision = self.map.get_tile(self.player.x, self.player.y).collision(self.player.x % TILE_WIDTH, self.player.y % TILE_WIDTH, self.player.width, self.player.height)
     #print(player_collision)
     player_movement = [0,0]
@@ -68,15 +76,8 @@ class App:
 
     self.player.update(player_collision, player_movement)
     # limited fov
-    pyxel.clip(self.player.x - 5, self.player.y - 5, 10, 10)
+    # pyxel.clip(self.player.x - 5, self.player.y - 5, 10, 10)
 
-    # update entities
-    for entity in self.entities:
-      if entity.wallCollider:
-        collision = self.map.get_tile(entity.x, entity.y).collision(entity.x % TILE_WIDTH, entity.y % TILE_WIDTH, entity.width, entity.height)
-        entity.update(collision)
-      else:
-        entity.update()
 
     self.map.evaluateLogic()
 
