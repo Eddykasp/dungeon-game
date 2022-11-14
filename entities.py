@@ -104,7 +104,7 @@ class Worm(Entity):
     super().update(collision, direction)
 
 class MovableBlock(CollidingEntity):
-  imageX = [2]
+  imageX = [0]
   imageY = [0]
   width = 4
   height = 4
@@ -127,10 +127,26 @@ class MovableBlock(CollidingEntity):
           self.move([1,0])
         return collision
     # right side
-    elif x - width / 2 < self.x - self.width / 2 and x > self.x\
+    elif x - width / 2 < self.x + self.width / 2 and x > self.x\
       and y > self.y - self.height / 2 and y < self.y + height:
       collision = checkOtherCollisions()
       if collision[0] == 0 and collision[1] == 0:
         self.move([-1,0])
       return collision
+
+    # bottom side
+    elif y - height / 2 < self.y + self.height / 2 and y > self.y\
+      and x > self.x - self.width / 2 and x < self.x + width:
+        collision = checkOtherCollisions()
+        if collision[0] == 0 and collision[1] == 0:
+          self.move([0,-1])
+        return collision
+
+    # top side
+    elif  y + height / 2 > self.y - self.height / 2 and y < self.y\
+      and x > self.x - self.width / 2 and x < self.x + width:
+        collision = checkOtherCollisions()
+        if collision[0] == 0 and collision[1] == 0:
+          self.move([0,1])
+        return collision
     return (0,0)
