@@ -18,6 +18,13 @@ class Player(Entity):
     self.wallCollider = True
     self.imageX = [2]
     self.imageY = [0]
+    self.health = 3
+
+  def damage(self,damage):
+    self.health -= damage
+    if (self.health <= 0):
+      # TODO: DEATH
+      return
 
 class App:
   def __init__(self):
@@ -56,6 +63,10 @@ class App:
     for entity in self.entities:
       if entity.wallCollider:
         collision = self.map.get_tile(entity.x, entity.y).collision(entity.x % TILE_WIDTH, entity.y % TILE_WIDTH, entity.width, entity.height)
+        for otherEntity in self.entities:
+          if isinstance(otherEntity, CollidingEntity) and otherEntity != entity:
+            entityCollision = otherEntity.collision(entity.x, entity.y, entity.width, entity.height)
+            entity.update(entityCollision)
         entity.update(collision)
       else:
         entity.update()

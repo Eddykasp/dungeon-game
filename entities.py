@@ -68,6 +68,10 @@ class Entity:
     elif self.direction[0] > 0:
       self.renderDirection = 1
 
+class CollidingEntity(Entity):
+  def collision(self,x, y, width, height):
+    return (0,0)
+
 class Worm(Entity):
   width = 3
   height = 1
@@ -97,3 +101,16 @@ class Worm(Entity):
     if collision[0] != 0 or collision[1] != 0:
       self.collidedLastTick = True
     super().update(collision, direction)
+
+class MovableBlock(Entity):
+  imageX = [0]
+  imageY = [0]
+  width = 4
+  height = 4
+
+  def collision(self,x, y, width, height):
+    # right side
+    if x + width / 2 > self.x - self.width / 2\
+      and y > self.y - self.height / 2 and y < self.y + height:
+      return (0,0)
+    return (0,0)

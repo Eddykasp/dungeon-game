@@ -12,7 +12,7 @@ class Tile:
     self.x = x
     self.y = y
 
-  def draw(self):    
+  def draw(self):
     pyxel.blt(self.x* TILE_WIDTH,self.y* TILE_WIDTH,
       pyxel.image(self.imageId),
       self.imageX[self.state] * TILE_WIDTH,
