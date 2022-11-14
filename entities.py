@@ -115,7 +115,7 @@ class MovableBlock(CollidingEntity):
       entityCollision = [0,0]
       for otherEntity in entities:
           if isinstance(otherEntity, CollidingEntity) and otherEntity != self:
-            entityCollision = otherEntity.collision(self.x, self.y, self.self, self.height,self.map)
+            entityCollision = otherEntity.collision(self.x, self.y, self.width, self.height,map,entities)
             self.update(entityCollision)
       return [collision[0] + entityCollision[0], collision[1] + entityCollision[1]]
       
