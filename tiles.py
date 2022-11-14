@@ -48,6 +48,13 @@ class Floor(Tile):
   imageX = [2]
   imageY = [0]
 
+class Stair(Tile):
+  pass
+
+class StairRight(Stair):
+  imageX = [6]
+  imageY = [1] 
+
 class Wall(Tile):
   thickness = 1
 
