@@ -53,7 +53,7 @@ class Stair(Tile):
 
 class StairRight(Stair):
   imageX = [6]
-  imageY = [1] 
+  imageY = [0] 
 
 class Wall(Tile):
   thickness = 1
