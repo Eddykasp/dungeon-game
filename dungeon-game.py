@@ -31,9 +31,9 @@ class App:
     self.player = Player()
     worm = Worm(5,5)
     pushBlock = MovableBlock(10,10)
-    pushBlock2 = MovableBlock(20,10)
+    #pushBlock2 = MovableBlock(20,10)
 
-    self.entities = [self.player,worm,pushBlock,pushBlock2]
+    self.entities = [self.player,worm,pushBlock]
 
     self.map = Map(GAME_WIDTH, GAME_HEIGHT, TILE_WIDTH)
 
