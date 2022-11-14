@@ -49,7 +49,7 @@ class Floor(Tile):
   imageY = [0]
 
 class Wall(Tile):
-  thickness = 2
+  thickness = 1
 
 class WallRight(Wall):
   imageX = [0]
