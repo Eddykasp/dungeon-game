@@ -1,6 +1,7 @@
 import pyxel
 import random as r
 from tiles import TILE_WIDTH
+from map import *
 
 # UTILS
 def reverseDirection(direction):
@@ -69,7 +70,7 @@ class Entity:
       self.renderDirection = 1
 
 class CollidingEntity(Entity):
-  def collision(self,x, y, width, height):
+  def collision(self,x, y, width, height,map:Map,entities):
     return (0,0)
 
 class Worm(Entity):
@@ -102,15 +103,34 @@ class Worm(Entity):
       self.collidedLastTick = True
     super().update(collision, direction)
 
-class MovableBlock(Entity):
-  imageX = [0]
+class MovableBlock(CollidingEntity):
+  imageX = [2]
   imageY = [0]
   width = 4
   height = 4
 
-  def collision(self,x, y, width, height):
-    # right side
-    if x + width / 2 > self.x - self.width / 2\
+  def collision(self,x, y, width, height,map:Map,entities):
+    def checkOtherCollisions():
+      collision = map.get_tile(self.x,self.y).collision(self.x % TILE_WIDTH, self.y % TILE_WIDTH, self.width, self.height)
+      entityCollision = [0,0]
+      for otherEntity in entities:
+          if isinstance(otherEntity, CollidingEntity) and otherEntity != self:
+            entityCollision = otherEntity.collision(self.x, self.y, self.self, self.height,self.map)
+            self.update(entityCollision)
+      return [collision[0] + entityCollision[0], collision[1] + entityCollision[1]]
+      
+    # left side
+    if x + width / 2 > self.x - self.width / 2 and x < self.x\
       and y > self.y - self.height / 2 and y < self.y + height:
-      return (0,0)
+        collision = checkOtherCollisions()
+        if collision[0] == 0 and collision[1] == 0:
+          self.move([1,0])
+        return collision
+    # right side
+    elif x - width / 2 < self.x - self.width / 2 and x > self.x\
+      and y > self.y - self.height / 2 and y < self.y + height:
+      collision = checkOtherCollisions()
+      if collision[0] == 0 and collision[1] == 0:
+        self.move([-1,0])
+      return collision
     return (0,0)

@@ -30,8 +30,9 @@ class App:
   def __init__(self):
     self.player = Player()
     worm = Worm(5,5)
+    pushBlock = MovableBlock(10,10)
 
-    self.entities = [worm]
+    self.entities = [self.player,worm,pushBlock]
 
     self.map = Map(GAME_WIDTH, GAME_HEIGHT, TILE_WIDTH)
 
@@ -65,7 +66,7 @@ class App:
         collision = self.map.get_tile(entity.x, entity.y).collision(entity.x % TILE_WIDTH, entity.y % TILE_WIDTH, entity.width, entity.height)
         for otherEntity in self.entities:
           if isinstance(otherEntity, CollidingEntity) and otherEntity != entity:
-            entityCollision = otherEntity.collision(entity.x, entity.y, entity.width, entity.height)
+            entityCollision = otherEntity.collision(entity.x, entity.y, entity.width, entity.height,self.map, self.entities)
             entity.update(entityCollision)
         entity.update(collision)
       else:
