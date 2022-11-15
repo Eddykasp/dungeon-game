@@ -82,7 +82,9 @@ class Map:
       self.id_to_connection(tile_id, door)
       return door
     elif tile_id == "SR":
-      return StairRight(row_index, col_index)  
+      return StairRight(row_index, col_index)
+    elif tile_id == "SL":
+      return StairLeft(row_index, col_index)  
     else:
       return Tile(row_index, col_index)
 

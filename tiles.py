@@ -55,6 +55,10 @@ class StairRight(Stair):
   imageX = [6]
   imageY = [0] 
 
+class StairLeft(Stair):
+  imageX = [5]
+  imageY = [0]
+
 class Wall(Tile):
   thickness = 1
 
