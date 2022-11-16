@@ -44,10 +44,10 @@ class App:
     #                   ["F", "F", "SR", "F"]],
     #                   ["AND_0", "OR_0>A_2","NOT_0>T_0", "T_0>DB_0;DT_0", "DEL_0>A_1"])
 
-    self.map.load_map([["F,WT,WL,WB",   "F,WT",  "F,WR,WT", "F,WL,WT", "F,WT,DR_0,PP_0", "F,WT,WR,DL_0"], 
-                       ["F,WL,WT,WR",   "F,WL",  "F,WR",    "F,WL",    "F,WR",           "F,WL,WR"], 
-                       ["F,WL,WR",      "F,WL",  "F,WR",    "F,WL",    "F,WR",           "F,WL,WR"],
-                       ["F,WL,WB",      "F,WB",  "F,WB",    "F,WB",    "F,WB,WR",        "SR,WL,WR,WB"]],
+    self.map.load_map([["F,WT,WL,WB",   "F,WT",  "F,WR,WT", "F,WL,WT", "F,WT,DR_0,PP_0>DR_0;DL_0", "F,WT,WR,DL_0"], 
+                       ["F,WL,WT,WR",   "F,WL",  "F,WR",    "F,WL",    "F,WR",                     "F,WL,WR"], 
+                       ["F,WL,WR",      "F,WL",  "F,WR",    "F,WL",    "F,WR",                     "F,WL,WR"],
+                       ["F,WL,WB",      "F,WB",  "F,WB",    "F,WB",    "F,WB,WR",                  "SR,WL,WR,WB"]],
                        [])                   
 
 
