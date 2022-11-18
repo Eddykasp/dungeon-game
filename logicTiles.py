@@ -51,7 +51,7 @@ class PressurePlate(Sensor):
   imageX = [3,4]
   imageY = [0,0]
 
-  def collision(self,sub_tile_x, sub_tile_y, width, height):
+  def collision(self,sub_tile_x, sub_tile_y, width, height, app):
     if sub_tile_x >= 2 and sub_tile_x <= 5\
       and sub_tile_y >= 2 and sub_tile_y <= 5:
       self.activate()
@@ -63,9 +63,9 @@ class DoorRight(Actuator, WallRight):
   imageX = [0]
   imageY = [0]
 
-  def collision(self, sub_tile_x, sub_tile_y, width, height):
+  def collision(self, sub_tile_x, sub_tile_y, width, height, app):
     if self.state == 0:
-      return super().collision(sub_tile_x, sub_tile_y, width, height)
+      return super().collision(sub_tile_x, sub_tile_y, width, height, app)
     else:
       return [0,0]
 
@@ -77,9 +77,9 @@ class DoorLeft(Actuator, WallLeft):
   imageX = [1]
   imageY = [1]
 
-  def collision(self, sub_tile_x, sub_tile_y, width, height):
+  def collision(self, sub_tile_x, sub_tile_y, width, height, app):
     if self.state == 0:
-      return super().collision(sub_tile_x, sub_tile_y, width, height)
+      return super().collision(sub_tile_x, sub_tile_y, width, height, app)
     else:
       return [0,0]
 
@@ -91,9 +91,9 @@ class DoorTop(Actuator, WallTop):
   imageX = [0]
   imageY = [1]
 
-  def collision(self, sub_tile_x, sub_tile_y, width, height):
+  def collision(self, sub_tile_x, sub_tile_y, width, height, app):
     if self.state == 0:
-      return super().collision(sub_tile_x, sub_tile_y, width, height)
+      return super().collision(sub_tile_x, sub_tile_y, width, height, app)
     else:
       return [0,0]
 
@@ -105,9 +105,9 @@ class DoorBottom(Actuator, WallBottom):
   imageX = [1]
   imageY = [0]
 
-  def collision(self, sub_tile_x, sub_tile_y, width, height):
+  def collision(self, sub_tile_x, sub_tile_y, width, height, app):
     if self.state == 0:
-      return super().collision(sub_tile_x, sub_tile_y, width, height)
+      return super().collision(sub_tile_x, sub_tile_y, width, height, app)
     else:
       return [0,0]
 

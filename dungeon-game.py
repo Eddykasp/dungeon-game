@@ -4,6 +4,7 @@ from logicTiles import *
 from map import *
 import random as r
 from entities import *
+from level import Levels
 
 GAME_WIDTH = 160 # 20 Tiles 
 GAME_HEIGHT = 112 # 14 Tiles
@@ -29,13 +30,8 @@ class Player(Entity):
 class App:
   def __init__(self):
     self.player = Player()
-    worm = Worm(5,5)
-    pushBlock = MovableBlock(10,10)
-    #pushBlock2 = MovableBlock(20,10)
-
-    self.entities = [self.player,worm,pushBlock]
-
-    self.map = Map(GAME_WIDTH, GAME_HEIGHT, TILE_WIDTH)
+    self.levelCounter = 0
+    self.levelComplete = False
 
     #self.map.load_map([["F,WT,WL",      "F,PP_0>OR_0;A_0;DR_0;DL_0;T_0,WT",    "F,PP_1>OR_0;DEL_0,WR,WT", "F,WL,WT"], 
     #                   ["F,WL",         "F,WB",                           "F,WR",                    "F,WL"], 
@@ -44,18 +40,7 @@ class App:
     #                   ["F", "F", "SR", "F"]],
     #                   ["AND_0", "OR_0>A_2","NOT_0>T_0", "T_0>DB_0;DT_0", "DEL_0>A_1"])
 
-    self.map.load_map([["F,WT,WL,WB",   "F,WT",  "F,WR,WT", "F,WL,WT", "F,WT,DR_0,PP_0>DR_0;DL_0", "F,WT,WR,DL_0"], 
-                       ["F,WL,WT,WR",   "F,WL",  "F,WR",    "F,WL",    "F,WR",                     "F,WL,WR"], 
-                       ["F,WL,WR",      "F,WL",  "F,WR",    "F,WL",    "F,WR",                     "F,WL,WR"],
-                       ["F,WL,WB",      "F,WB",  "F,WB",    "F,WB",    "F,WB,WR",                  "SR,WL,WR,WB"]],
-                       [])                   
-
-
-    # create random map for testing
-    tile_types = ["F", "FWR", "FWB", "FWT", "FWL"]
-    # for row_index in range(len(self.map.tiles)):
-    #   for col_index in range(len(self.map.tiles[row_index])):
-    #     self.map.tiles[row_index][col_index] = self.map.create_tile(tile_types[r.randrange(0, len(tile_types))], row_index, col_index)
+    self.loadLevel()
       
     pyxel.init(GAME_WIDTH, GAME_HEIGHT, title="Dungeon Game", display_scale=8)
     # load resource file
@@ -63,25 +48,32 @@ class App:
     self.playingMusic = False
     pyxel.run(self.update, self.draw)
 
+  def loadLevel(self):
+    level = Levels.levels[self.levelCounter]
+    self.map = Map(GAME_WIDTH, GAME_HEIGHT, TILE_WIDTH)
+    self.map.load_map(level.map_tiles, level.logic_blocks)     
+    self.player.x = level.player_coords[0]
+    self.player.y = level.player_coords[1]    
+    self.entities = level.entities()  
+
   def update(self):
     if not self.playingMusic:
       pyxel.playm(2,loop=True)
       self.playingMusic = True
 
-    # update entities
+    if self.levelComplete:
+      self.levelCounter += 1
+      self.loadLevel()
+      self.levelComplete = False
+
     for entity in self.entities:
       if entity.wallCollider:
-        collision = self.map.get_tile(entity.x, entity.y).collision(entity.x % TILE_WIDTH, entity.y % TILE_WIDTH, entity.width, entity.height)
-        for otherEntity in self.entities:
-          if isinstance(otherEntity, CollidingEntity) and otherEntity != entity:
-            entityCollision = otherEntity.collision(entity.x, entity.y, entity.width, entity.height,self.map, self.entities)
-            entity.update(entityCollision)
+        collision = self.map.get_tile(entity.x, entity.y).collision(entity.x % TILE_WIDTH, entity.y % TILE_WIDTH, entity.width, entity.height,self)
         entity.update(collision)
       else:
         entity.update()
 
-    player_collision = self.map.get_tile(self.player.x, self.player.y).collision(self.player.x % TILE_WIDTH, self.player.y % TILE_WIDTH, self.player.width, self.player.height)
-    #print(player_collision)
+    player_collision = self.map.get_tile(self.player.x, self.player.y).collision(self.player.x % TILE_WIDTH, self.player.y % TILE_WIDTH, self.player.width, self.player.height, self)
     player_movement = [0,0]
     if pyxel.btnp(pyxel.KEY_Q):
       pyxel.quit()
@@ -97,8 +89,6 @@ class App:
     self.player.update(player_collision, player_movement)
     # limited fov
     # pyxel.clip(self.player.x - 5, self.player.y - 5, 10, 10)
-
-
     self.map.evaluateLogic()
 
   def draw(self):

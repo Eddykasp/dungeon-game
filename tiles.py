@@ -20,7 +20,7 @@ class Tile:
 
   """
   Returns an int pair to indicate the collision direction, to apply ontop of movement to undo it"""
-  def collision(self,sub_tile_x, sub_tile_y, width, height):
+  def collision(self,sub_tile_x, sub_tile_y, width, height,app):
     return (0,0)
 
 class TileStack(Tile):
@@ -33,10 +33,10 @@ class TileStack(Tile):
     for tile in self.tiles:
       tile.draw()
 
-  def collision(self, sub_tile_x, sub_tile_y, width, height):
+  def collision(self, sub_tile_x, sub_tile_y, width, height, app):
     total_collision = [0,0]
     for tile in self.tiles:
-      collision = tile.collision(sub_tile_x, sub_tile_y, width, height)
+      collision = tile.collision(sub_tile_x, sub_tile_y, width, height, app)
       for i in range(len(collision)):
         # highest tile has collision precedence
         if collision[i] != 0 and total_collision[i] != collision[i]:
@@ -49,7 +49,9 @@ class Floor(Tile):
   imageY = [0]
 
 class Stair(Tile):
-  pass
+  def collision(self, sub_tile_x, sub_tile_y, width, height, app):
+      app.levelComplete = True
+      return super().collision(sub_tile_x, sub_tile_y, width, height, app)
 
 class StairRight(Stair):
   imageX = [6]
@@ -66,7 +68,7 @@ class WallRight(Wall):
   imageX = [0]
   imageY = [0]
 
-  def collision(self,sub_tile_x, sub_tile_y, width, height):
+  def collision(self,sub_tile_x, sub_tile_y, width, height,app):
     if sub_tile_x + width / 2 > TILE_WIDTH - self.thickness:
       return (-1, 0)
     else:
@@ -76,7 +78,7 @@ class WallLeft(Wall):
   imageX = [1]
   imageY = [1]
   
-  def collision(self,sub_tile_x, sub_tile_y, width, height):
+  def collision(self,sub_tile_x, sub_tile_y, width, height,app):
     if sub_tile_x - width / 2 < self.thickness:
       return (1, 0)
     else:
@@ -86,7 +88,7 @@ class WallTop(Wall):
   imageX = [0]
   imageY = [1]
 
-  def collision(self,sub_tile_x, sub_tile_y, width, height):
+  def collision(self,sub_tile_x, sub_tile_y, width, height,app):
     if sub_tile_y - height / 2 < self.thickness:
       return (0, 1)
     else:
@@ -96,7 +98,7 @@ class WallBottom(Wall):
   imageX = [1]
   imageY = [0]
 
-  def collision(self,sub_tile_x, sub_tile_y, width, height):
+  def collision(self,sub_tile_x, sub_tile_y, width, height,app):
     if sub_tile_y + height / 2 > TILE_WIDTH - self.thickness:
       return (0, -1)
     else:

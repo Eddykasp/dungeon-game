@@ -121,14 +121,14 @@ class MovableBlock(CollidingEntity):
       
     # left side
     if x + width / 2 > self.x - self.width / 2 and x < self.x\
-      and y > self.y - self.height / 2 and y < self.y + height:
+      and y >= self.y - self.height / 2 and y <= self.y + height:
         collision = checkOtherCollisions()
         if collision[0] == 0 and collision[1] == 0:
           self.move([1,0])
         return collision
     # right side
     elif x - width / 2 < self.x + self.width / 2 and x > self.x\
-      and y > self.y - self.height / 2 and y < self.y + height:
+      and y >= self.y - self.height / 2 and y <= self.y + height:
       collision = checkOtherCollisions()
       if collision[0] == 0 and collision[1] == 0:
         self.move([-1,0])
@@ -136,7 +136,7 @@ class MovableBlock(CollidingEntity):
 
     # bottom side
     elif y - height / 2 < self.y + self.height / 2 and y > self.y\
-      and x > self.x - self.width / 2 and x < self.x + width:
+      and x >= self.x - self.width / 2 and x <= self.x + width:
         collision = checkOtherCollisions()
         if collision[0] == 0 and collision[1] == 0:
           self.move([0,-1])
@@ -144,7 +144,7 @@ class MovableBlock(CollidingEntity):
 
     # top side
     elif  y + height / 2 > self.y - self.height / 2 and y < self.y\
-      and x > self.x - self.width / 2 and x < self.x + width:
+      and x >= self.x - self.width / 2 and x <= self.x + width:
         collision = checkOtherCollisions()
         if collision[0] == 0 and collision[1] == 0:
           self.move([0,1])
