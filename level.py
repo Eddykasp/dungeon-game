@@ -13,7 +13,7 @@ class Level1:
     return entities
 
 class Level2:
-  map_tiles = [["F", "F"],[]]
+  map_tiles = [["F", "F", "SR"],[]]
   logic_blocks = []
   player_coords = [3,3]
   def entities(self):
@@ -22,7 +22,7 @@ class Level2:
     return entities
 
 class Level3:
-  map_tiles = [["F", "F", "F"],[]]
+  map_tiles = [["F", "F", "F", "SR"],[]]
   logic_blocks = []
   player_coords = [3,3]
   def entities(self):
@@ -31,7 +31,7 @@ class Level3:
     return entities
 
 class Level4:
-  map_tiles = [["F", "F", "F", "F"],[]]
+  map_tiles = [["F", "F", "F", "F", "SR"],[]]
   logic_blocks = []
   player_coords = [3,3]
   def entities(self):
