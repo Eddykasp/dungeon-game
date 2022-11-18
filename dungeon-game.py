@@ -22,16 +22,19 @@ class Player(Entity):
     self.health = 3
 
   def damage(self,damage):
-    self.health -= damage
-    if (self.health <= 0):
-      # TODO: DEATH
-      return
+    if self.iFrames == 0:
+      self.iFrames = 15
+      self.health -= damage
+      print("DAMAGE -> HEALTH: " + str(self.health))
+      if (self.health <= 0):
+        print("TODO: DEATH")
 
 class App:
   def __init__(self):
     self.player = Player()
     self.levelCounter = 0
     self.levelComplete = False
+    self.playerVulnerable = False
 
     #self.map.load_map([["F,WT,WL",      "F,PP_0>OR_0;A_0;DR_0;DL_0;T_0,WT",    "F,PP_1>OR_0;DEL_0,WR,WT", "F,WL,WT"], 
     #                   ["F,WL",         "F,WB",                           "F,WR",                    "F,WL"], 
@@ -73,7 +76,9 @@ class App:
       else:
         entity.update()
 
+    self.playerVulnerable = True
     player_collision = self.map.get_tile(self.player.x, self.player.y).collision(self.player.x % TILE_WIDTH, self.player.y % TILE_WIDTH, self.player.width, self.player.height, self)
+    self.playerVulnerable = False
     player_movement = [0,0]
     if pyxel.btnp(pyxel.KEY_Q):
       pyxel.quit()

@@ -81,6 +81,10 @@ class Map:
       door = DoorBottom(row_index, col_index, tile_id)
       self.id_to_connection(tile_id, door)
       return door
+    elif tile_id.startswith("SP"):
+      spikeTrap = SpikeTrap(row_index, col_index, tile_id)
+      self.id_to_connection(tile_id, spikeTrap)
+      return spikeTrap
     elif tile_id == "SR":
       return StairRight(row_index, col_index)
     elif tile_id == "SL":

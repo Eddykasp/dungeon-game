@@ -45,6 +45,7 @@ class Entity:
   height = 8
   wallCollider = False
   renderDirection = 1
+  iFrames = 0
 
   def __init__(self,x,y):
     self.x = x
@@ -61,6 +62,8 @@ class Entity:
     self.y += movement[1] * self.speed
 
   def update(self, collision=[0,0], newDirection=[0,0]):
+    if self.iFrames > 0:
+      self.iFrames -= 1
     self.direction = newDirection
     self.move([self.direction[0] + collision[0], 
                self.direction[1] + collision[1]])

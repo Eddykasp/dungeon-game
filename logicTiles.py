@@ -59,6 +59,15 @@ class PressurePlate(Sensor):
       self.deactivate()
     return (0,0)
 
+class SpikeTrap(Actuator):
+  imageX = [5,6]
+  imageY = [1,1]
+
+  def collision(self, sub_tile_x, sub_tile_y, width, height, app):
+    if app.playerVulnerable:
+      app.player.damage(1)
+    return super().collision(sub_tile_x, sub_tile_y, width, height, app)
+
 class DoorRight(Actuator, WallRight):
   imageX = [0]
   imageY = [0]

@@ -3,9 +3,9 @@ from entities import *
 class Level1:
   map_tiles = [["F,WT,WL,WB",   "F,WT",  "F,WR,WT", "F,WL,WT", "F,WT,DR_0,PP_0>DR_0;DL_0", "F,WT,WR,DL_0"], 
                ["F,WL,WT,WR",   "F,WL",  "F,WR",    "F,WL",    "F,WR",                     "F,WL,WR"], 
-               ["F,WL,WR",      "F,WL",  "F,WR",    "F,WL",    "F,WR",                     "F,WL,WR"],
+               ["F,WL,WR",      "F,SP_0,WL",  "F,WR",    "F,WL",    "F,WR",                     "F,WL,WR"],
                ["F,WL,WB",      "F,WB",  "F,WB",    "F,WB",    "F,WB",                  "SR,WR,WB"]]
-  logic_blocks = []
+  logic_blocks = ["NOT_0>NOT_1", "NOT_1>SP_0"]
   player_coords = [3,3]
   def entities(self):
     entities = []
