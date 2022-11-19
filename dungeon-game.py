@@ -25,9 +25,24 @@ class Player(Entity):
     if self.iFrames == 0:
       self.iFrames = 15
       self.health -= damage
-      print("DAMAGE -> HEALTH: " + str(self.health))
+      pyxel.play(2,15)
       if (self.health <= 0):
-        print("TODO: DEATH")
+        pass
+  
+  def draw(self):
+    super().draw()
+    # HEALTH BAR
+    heart_pos = [GAME_WIDTH - 8, 3]
+    for i in range(self.health):
+      # draw heart
+      pyxel.rect(heart_pos[0], heart_pos[1], 5, 2, 8)
+      pyxel.rect(heart_pos[0] + 1, heart_pos[1] + 2, 3, 1, 8)
+      pyxel.rect(heart_pos[0] + 2, heart_pos[1] + 3, 1, 1, 8)
+      pyxel.rect(heart_pos[0] + 1, heart_pos[1] - 1, 1, 1, 8)
+      pyxel.rect(heart_pos[0] + 3, heart_pos[1] - 1, 1, 1, 8)
+      heart_pos[0] -= 9
+
+
 
 class App:
   def __init__(self):
@@ -63,18 +78,27 @@ class App:
     if not self.playingMusic:
       pyxel.playm(2,loop=True)
       self.playingMusic = True
+    
+    if self.player.health <= 0:
+      self.levelCounter = -1
+      self.loadLevel()
+      self.levelComplete = False
+      self.player.health = 3
 
     if self.levelComplete:
       self.levelCounter += 1
       self.loadLevel()
       self.levelComplete = False
 
+    # entities shouldn't activate the same triggers as the player so for now just disable them
+    # for entity in self.entities:
+    #   if entity.wallCollider:
+    #     collision = self.map.get_tile(entity.x, entity.y).collision(entity.x % TILE_WIDTH, entity.y % TILE_WIDTH, entity.width, entity.height,self)
+    #     entity.update(collision)
+    #   else:
+    #     entity.update()
     for entity in self.entities:
-      if entity.wallCollider:
-        collision = self.map.get_tile(entity.x, entity.y).collision(entity.x % TILE_WIDTH, entity.y % TILE_WIDTH, entity.width, entity.height,self)
-        entity.update(collision)
-      else:
-        entity.update()
+      entity.update([0,0])
 
     self.playerVulnerable = True
     player_collision = self.map.get_tile(self.player.x, self.player.y).collision(self.player.x % TILE_WIDTH, self.player.y % TILE_WIDTH, self.player.width, self.player.height, self)
