@@ -114,6 +114,8 @@ class App:
       player_movement[1] = -1
     if pyxel.btnp(pyxel.KEY_DOWN,hold=1,repeat=1) or pyxel.btnp(pyxel.KEY_S,hold=1,repeat=1):
       player_movement[1] = 1
+    if pyxel.btnp(pyxel.KEY_E):
+      self.map.get_tile(self.player.x, self.player.y).interact()
 
     self.player.update(player_collision, player_movement)
     # limited fov

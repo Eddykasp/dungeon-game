@@ -12,7 +12,7 @@ class Level1:
     return entities
 
 class Level2:
-  map_tiles = [["F", "F", "SL"],[]]
+  map_tiles = [["F", "F,L", "SL"],[]]
   logic_blocks = []
   player_coords = [3,3]
   def entities(self):

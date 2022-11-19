@@ -23,6 +23,9 @@ class Tile:
   def collision(self,sub_tile_x, sub_tile_y, width, height,app):
     return (0,0)
 
+  def interact(self):
+    return
+
 class TileStack(Tile):
   def __init__(self, x, y, tiles):
     self.x = x
@@ -42,6 +45,10 @@ class TileStack(Tile):
         if collision[i] != 0 and total_collision[i] != collision[i]:
           total_collision[i] = collision[i]
     return total_collision
+  
+  def interact(self):
+    for tile in self.tiles:
+      tile.interact()
         
 
 class Floor(Tile):

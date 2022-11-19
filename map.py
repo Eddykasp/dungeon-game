@@ -61,6 +61,10 @@ class Map:
       pressurePlate = PressurePlate(row_index, col_index, tile_id)
       self.id_to_connection(tile_id, pressurePlate)
       return pressurePlate
+    elif tile_id.startswith("L"):
+      lever = Lever(row_index, col_index, tile_id)
+      self.id_to_connection(tile_id, lever)
+      return lever
     elif tile_id.startswith("A"):
       actuator = Actuator(row_index, col_index, tile_id)
       self.logicTiles[tile_id] = actuator
