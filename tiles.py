@@ -4,8 +4,8 @@ TILE_WIDTH = 8
 
 class Tile:
   imageId = 0 # all tiles saved on image 0
-  imageX = [2] # empty tile marker
-  imageY = [1]
+  imageX = [7] # empty tile marker
+  imageY = [0]
   state = 0
   
   def __init__(self, x, y):
