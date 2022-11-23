@@ -74,7 +74,7 @@ class SpikeTrap(Actuator):
   imageY = [1,1]
 
   def collision(self, sub_tile_x, sub_tile_y, width, height, app):
-    if app.playerVulnerable:
+    if app.playerVulnerable and self.state == 1:
       app.player.damage(1)
     return super().collision(sub_tile_x, sub_tile_y, width, height, app)
 
