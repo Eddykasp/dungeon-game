@@ -89,15 +89,9 @@ class WallRight(Wall):
     else:
       return (0,0)
 
-class DeathWallRight(Wall):
+class DeathWallRight(WallRight):
   imageX = [0]
-  imageY = [2]
-
-  def collision(self,sub_tile_x, sub_tile_y, width, height,app):
-    if sub_tile_x + width / 2 > TILE_WIDTH - self.thickness:
-      return (-1, 0)
-    else:
-      return (0,0)      
+  imageY = [2]    
 
 class WallLeft(Wall):
   imageX = [1]
@@ -109,15 +103,9 @@ class WallLeft(Wall):
     else:
       return (0,0)
 
-class DeathWallLeft(Wall):
+class DeathWallLeft(WallLeft):
   imageX = [1]
   imageY = [3]
-  
-  def collision(self,sub_tile_x, sub_tile_y, width, height,app):
-    if sub_tile_x - width / 2 < self.thickness:
-      return (1, 0)
-    else:
-      return (0,0)
 
 class WallTop(Wall):
   imageX = [0]
@@ -129,15 +117,9 @@ class WallTop(Wall):
     else:
       return (0,0)
 
-class DeathWallTop(Wall):
+class DeathWallTop(WallTop):
   imageX = [0]
   imageY = [3]
-
-  def collision(self,sub_tile_x, sub_tile_y, width, height,app):
-    if sub_tile_y - height / 2 < self.thickness:
-      return (0, 1)
-    else:
-      return (0,0)
 
 class WallBottom(Wall):
   imageX = [1]
@@ -149,12 +131,6 @@ class WallBottom(Wall):
     else:
       return (0,0)
 
-class DeathWallBottom(Wall):
+class DeathWallBottom(WallBottom):
   imageX = [1]
   imageY = [2]
-
-  def collision(self,sub_tile_x, sub_tile_y, width, height,app):
-    if sub_tile_y + height / 2 > TILE_WIDTH - self.thickness:
-      return (0, -1)
-    else:
-      return (0,0)
