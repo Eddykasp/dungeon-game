@@ -55,10 +55,14 @@ class Floor(Tile):
   imageX = [2]
   imageY = [0]
 
+class DeathFloor(Tile):
+  imageX = [2]
+  imageY = [2]  
+
 class Stair(Tile):
   def collision(self, sub_tile_x, sub_tile_y, width, height, app):
       app.levelComplete = True
-      return super().collision(sub_tile_x, sub_tile_y, width, height, app)
+      return super().collision(sub_tile_x, sub_tile_y, width, height, app)     
 
 class StairRight(Stair):
   imageX = [6]
@@ -67,6 +71,10 @@ class StairRight(Stair):
 class StairLeft(Stair):
   imageX = [5]
   imageY = [0]
+
+class DeathStair(Stair):
+  imageX = [3]
+  imageY = [2]  
 
 class Wall(Tile):
   thickness = 1
@@ -81,9 +89,29 @@ class WallRight(Wall):
     else:
       return (0,0)
 
+class DeathWallRight(Wall):
+  imageX = [0]
+  imageY = [2]
+
+  def collision(self,sub_tile_x, sub_tile_y, width, height,app):
+    if sub_tile_x + width / 2 > TILE_WIDTH - self.thickness:
+      return (-1, 0)
+    else:
+      return (0,0)      
+
 class WallLeft(Wall):
   imageX = [1]
   imageY = [1]
+  
+  def collision(self,sub_tile_x, sub_tile_y, width, height,app):
+    if sub_tile_x - width / 2 < self.thickness:
+      return (1, 0)
+    else:
+      return (0,0)
+
+class DeathWallLeft(Wall):
+  imageX = [1]
+  imageY = [3]
   
   def collision(self,sub_tile_x, sub_tile_y, width, height,app):
     if sub_tile_x - width / 2 < self.thickness:
@@ -101,9 +129,29 @@ class WallTop(Wall):
     else:
       return (0,0)
 
+class DeathWallTop(Wall):
+  imageX = [0]
+  imageY = [3]
+
+  def collision(self,sub_tile_x, sub_tile_y, width, height,app):
+    if sub_tile_y - height / 2 < self.thickness:
+      return (0, 1)
+    else:
+      return (0,0)
+
 class WallBottom(Wall):
   imageX = [1]
   imageY = [0]
+
+  def collision(self,sub_tile_x, sub_tile_y, width, height,app):
+    if sub_tile_y + height / 2 > TILE_WIDTH - self.thickness:
+      return (0, -1)
+    else:
+      return (0,0)
+
+class DeathWallBottom(Wall):
+  imageX = [1]
+  imageY = [2]
 
   def collision(self,sub_tile_x, sub_tile_y, width, height,app):
     if sub_tile_y + height / 2 > TILE_WIDTH - self.thickness:

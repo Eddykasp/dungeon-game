@@ -57,6 +57,18 @@ class Map:
       return WallBottom(row_index, col_index)
     elif tile_id == "WT":
       return WallTop(row_index, col_index)
+    elif tile_id == "DS":
+      return DeathStair(row_index, col_index)
+    elif tile_id == "DF":
+      return DeathFloor(row_index, col_index) 
+    elif tile_id == "DWR":
+      return DeathWallRight(row_index, col_index)  
+    elif tile_id == "DWL":
+      return DeathWallLeft(row_index, col_index) 
+    elif tile_id == "DWT":
+      return DeathWallTop(row_index, col_index)
+    elif tile_id == "DWB":
+      return DeathWallBottom(row_index, col_index)
     elif tile_id.startswith("PP"):
       pressurePlate = PressurePlate(row_index, col_index, tile_id)
       self.id_to_connection(tile_id, pressurePlate)
