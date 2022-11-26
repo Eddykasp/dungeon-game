@@ -6,8 +6,8 @@ import random as r
 from entities import *
 from level import Levels
 
-GAME_WIDTH = 160 # 20 Tiles 
-GAME_HEIGHT = 112 # 14 Tiles
+GAME_WIDTH = 120 # 15 Tiles 
+GAME_HEIGHT = 72 # 9 Tiles
 
 class Player(Entity):
   def __init__(self):
@@ -60,7 +60,7 @@ class App:
 
     self.loadLevel()
       
-    pyxel.init(GAME_WIDTH, GAME_HEIGHT, title="Dungeon Game", display_scale=8)
+    pyxel.init(GAME_WIDTH, GAME_HEIGHT, title="Dungeon Game", display_scale=12)
     # load resource file
     pyxel.load("./assets/dungeon_assets.pyxres", image=True, sound=True, music=True)
     self.playingMusic = False
