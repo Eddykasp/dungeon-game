@@ -38,7 +38,7 @@ class Not(LogicGate):
 # trigger an output signal after x ticks, reset if it receives an input signal
 class Timer(LogicGate):
   timerResetCounter = 0
-  clockSpeed = 20
+  clockSpeed = 30
   def updateState(self, inputSignal):
     if self.timerResetCounter > 0:
       self.timerResetCounter -= 1

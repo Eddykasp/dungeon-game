@@ -1,11 +1,14 @@
 from entities import *
 
 class Level1:
-  map_tiles = [["F,WT,WL,WB",   "F,WT",      "F,WR,WT",  "F,WL,WT", "F,WT,DR_0,L_0>DR_0;DL_0",  "F,WT,WR,DL_0"], 
-               ["F,WL,WT,WR",   "F,WL",      "F,WR",     "F,WL",    "F,WR",                     "PP_0,F,SP_2,WL,WR"], 
-               ["F,WL,WR",      "F,SP_0,WL", "F,WR","F,WL",    "F,WR",                     "F,WL,WR"],
-               ["F,WL,WB",      "F,WB",      "F,WB",     "F,WB",    "F,WR,WB",               "SL,WL,WR,WB"]]
-  logic_blocks = ["NOT_0>T_1", "T_1>SP_0"]
+  map_tiles = [["F,WT,WL", "F,WT", "F,WT", "F,WT", "F,WT", "F,WT,WR", "F,WL,WT", "F,WT", "F,WT,DR_0", "F,WT,DL_0", "F,WT", "F,WT,WR"], 
+               ["F,WL,WB", "F,WB", "F,WB", "F",    "F",    "F,WR",    "F,WL",    "F",    "F,DR_1",    "F,DL_1",    "F",    "F,WR"], 
+               ["F,WL,WT", "F,WT", "F,WR,WT", "F,WL,SP_0", "F,SP_1", "F,WR,SP_2", "F,WL", "F", "F,WR", "PP_2,F,SP_2,WL", "PP_2,F,SP_2", "PP_2,F,SP_2,WR"],
+               ["F,WL",    "F",    "F,WR",    "F,WL,SP_3", "F,SP_4", "F,WR,SP_5", "F,WL", "F,L_0>DR_0;DL_0;DR_1;DL_1", "F,WR", "PP_2,F,SP_2,WL", "PP_2,F,SP_2", "PP_2,F,SP_2,WR"],
+               ["F,WL",    "F",    "F,WR",    "F,WL,SP_6", "F,SP_7", "F,WR,SP_8", "F,WL", "F", "F,WR", "PP_2,F,SP_2,WL", "PP_2,F,SP_2", "PP_2,F,SP_2,WR"],
+               ["F,WL", "F", "F", "F", "F", "F", "F", "F", "F,WR", "F,WL", "F", "F,WR"],
+               ["F,WL,WB", "F,WB", "F,WB", "F,WB", "F,WB", "F,WB", "F,WB", "F,WB", "F,WR,WB", "F,WL,WB", "F,WB", "F,WR,WB"]]
+  logic_blocks = ["NOT_0>T_0", "T_0>NOT_1", "T_0>SP_0;SP_1;SP_2;SP_6;SP_7;SP_8", "NOT_1>SP_3"]
   player_coords = [3,3]
   def entities(self):
     entities = []
