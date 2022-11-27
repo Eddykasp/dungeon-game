@@ -1,4 +1,3 @@
-from sqlite3 import connect
 import pyxel
 from tiles import *
 
