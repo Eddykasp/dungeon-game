@@ -38,6 +38,7 @@ class Map:
           #print(str(logicTile) + " " + str(logicTile.outputSignal) + " " + str(self.logicTiles[logicTile.connectTo]))
         except Exception as error:
           f = True
+          print(self.logicTiles)
           print(str(logicTile.connectTo) + " is not defined in " + str(logicTile))
 
 
@@ -118,6 +119,9 @@ class Map:
     elif gate_id.startswith("NOT"):
       notGate = Not(gate_id)
       self.id_to_connection(gate_id, notGate)
+    elif gate_id.startswith("XOR"):
+      xorGate = Xor(gate_id)
+      self.id_to_connection(gate_id, xorGate)
     elif gate_id.startswith("T"):
       timer = Timer(gate_id)
       self.id_to_connection(gate_id, timer)

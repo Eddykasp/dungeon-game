@@ -23,17 +23,22 @@ class LogicGate():
 class And(LogicGate):
   def updateState(self, inputSignal):
       self.inputs.append(inputSignal)
-      self.outputSignal = reduce(lambda a, b: a and b, self.inputs)
+      self.outputSignal = reduce(lambda a, b: a and b, self.inputs, True)
 
 class Or(LogicGate):
   def updateState(self, inputSignal):
       self.inputs.append(inputSignal)
-      self.outputSignal = reduce(lambda a, b: a or b, self.inputs)
+      self.outputSignal = reduce(lambda a, b: a or b, self.inputs, False)
 
 class Not(LogicGate):
   def updateState(self, inputSignal):
       self.inputs = [inputSignal]
       self.outputSignal = not inputSignal
+
+class Xor(LogicGate):
+  def updateState(self, inputSignal):
+      self.inputs.append(inputSignal)
+      self.outputSignal = reduce(lambda a, b: a ^ b, self.inputs, False)
 
 # trigger an output signal after x ticks, reset if it receives an input signal
 class Timer(LogicGate):
