@@ -77,7 +77,13 @@ class WinLevel:
     return entities
 
 class DeathLevel:
-  map_tiles = [["DF,DWL,DWT", "DF,DWT", "DF,DWT", "DF,DWT", "DS,DWT,DWR"],[]]
+  map_tiles = [["", "", "DF,DWL,DWT", "DF,DWT", "DF,DWT", "DF,DWT", "DF,DWT,DWR", "", ""],
+               ["", "DF,DWL,DWT", "DF,DWB","DF,DWB","DF","DF,DWB","DF,DWB", "DF,DWT,DWR", ""],
+               ["DF,DWL,DWT", "DF,DWR", "", "", "DF,DWL,DWR", "", "", "DF,DWL", "DF,DWT,DWR"],
+               ["DF,DWL", "DF","DF,DWT","DF,DWT","DF","DF,DWT","DF,DWT","DF","DF,DWR"],
+               ["DF,DWL,DWB","DF","DF","DF","DS","DF","DF","DF","DF,DWR,DWB"],
+               ["", "DF,DWL", "DF,DWB","DF","DF,DWB","DF","DF,DWB","DF,DWR"],
+               ["", "DF,DWL,DWR,DWB", "", "DF,DWL,DWR,DWB", "", "DF,DWL,DWR,DWB", "", "DF,DWL,DWR,DWB"]]
   logic_blocks = []
   player_coords = [30,3]
   def entities(self):
