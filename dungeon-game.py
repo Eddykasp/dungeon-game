@@ -18,7 +18,7 @@ class Player(Entity):
     self.wallCollider = True
     self.imageX = [2]
     self.imageY = [0]
-    self.health = 3
+    self.health = 1
 
   def damage(self,damage):
     if self.iFrames == 0:
