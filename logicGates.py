@@ -63,7 +63,7 @@ class Timer(LogicGate):
       return
 
 class Delay(LogicGate):
-  delayLength = 11
+  delayLength = 15
   def updateState(self, inputSignal):
     if len(self.inputs) < self.delayLength:
       self.inputs.append(inputSignal)

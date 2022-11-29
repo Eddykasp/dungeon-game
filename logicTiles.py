@@ -51,8 +51,8 @@ class PressurePlate(Sensor):
   imageY = [0,0]
 
   def collision(self,sub_tile_x, sub_tile_y, width, height, app):
-    if sub_tile_x >= 2 and sub_tile_x <= 5\
-      and sub_tile_y >= 2 and sub_tile_y <= 5:
+    if sub_tile_x >= 1 and sub_tile_x <= 6\
+      and sub_tile_y >= 1 and sub_tile_y <= 6:
       self.activate()
     else:
       self.deactivate()

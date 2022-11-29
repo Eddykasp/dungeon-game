@@ -2,31 +2,37 @@ from entities import *
 import random
 
 class Level1:
-  map_tiles = [["F,WT,WL", "F,WT", "F,WT", "F,WT", "F,WT", "F,WT,WR", "F,WL,WT", "F,WT", "F,WT,DR_0", "F,WT,DL_0", "F,WT", "F,WT,WR"], 
-               ["F,WL,WB", "F,WB", "F,WB", "F",    "F",    "F,WR",    "F,WL",    "F",    "F,DR_1",    "F,DL_1",    "F",    "F,WR"], 
-               ["F,WL,WT", "F,WT", "F,WR,WT", "F,WL,SP_0", "F", "F,WR,SP_1", "F,WL", "F", "F,WR", "F,SP_5,WL", "PP_0>DEL_0,F,SP_6", "F,SP_7,WR"],
-               ["F,WL",    "F",    "F,WR",    "F,WL", "F,SP_2", "F,WR", "F,WL", "F,L_0>DR_0;DL_0;DR_1;DL_1", "F,WR", "F,SP_8,WL", "PP_1>DEL_1,F,SP_9", "F,SP_10,WR"],
-               ["F,WL",    "F",    "F,WR",    "F,WL,SP_3", "F", "F,WR,SP_4", "F,WL", "F", "F,WR", "F,SP_11,WL", "PP_2>DEL_2,F,SP_12", "F,SP_13,WR"],
-               ["F,WL", "F", "F", "F", "F", "F", "F", "F", "F,WR", "F,WL", "F", "F,WR"],
-               ["F,WL,WB", "F,WB", "F,WB", "F,WB", "F,WB", "F,WB", "F,WB", "F,WB", "F,WR,WB", "F,WL,WB", "F,WB", "SL,WR,WB"]]
+  map_tiles = [["","","F,WT,WL", "F,WT", "F,WT", "F,WT", "F,WT,WR", "F,WL,WT", "F,WT", "F,WT,DR_0", "F,WT,DL_0", "F,WT", "F,WT,WR"], 
+               ["","","SL,WL,WB", "F,WB", "F",    "F",    "F,WR",    "F,WL",    "F",    "F,DR_1",    "F,DL_1",    "F",    "F,WR"], 
+               ["","","F,WL,WT", "F,WR,WT", "F,WL,SP_0", "F", "F,WR,SP_1", "F,WL", "F", "F,WR", "F,SP_5,WL", "PP_0>DEL_0,F,SP_6", "F,SP_7,WR"],
+               ["","","F,WL", "F,WR",    "F,WL", "F,SP_2", "F,WR", "F,WL", "F,L_0>DR_0;DL_0;DR_1;DL_1", "F,WR", "F,SP_8,WL", "PP_1>DEL_1,F,SP_9", "F,SP_10,WR"],
+               ["","","F,WL", "F,WR",    "F,WL,SP_3", "F", "F,WR,SP_4", "F,WL", "F", "F,WR", "F,SP_11,WL", "PP_2>DEL_2,F,SP_12", "F,SP_13,WR"],
+               ["","","F,WL", "F", "F", "F", "F", "F", "F", "F,WR", "F,WL", "F", "F,WR"],
+               ["","","F,WL,WB", "F,WB", "F,WB", "F,WB", "F,WB", "F,WB", "F,WB", "F,WR,WB", "F,WL,WB", "F,WB", "SL,WR,WB"]]
   logic_blocks = ["NOT_0>T_0", "T_0>SP_0;SP_1;SP_3;SP_4;NOT_1", "NOT_1>SP_2", "NOT_2>NOT_3", "NOT_3>SP_5;SP_7;SP_8;SP_10;SP_11;SP_13",
                  "DEL_0>SP_6", "DEL_1>SP_9", "DEL_2>SP_12"]
-  player_coords = [3,3]
+  player_coords = [20,5]
   def entities(self):
     entities = []
     return entities
 
 class Level2:
-  map_tiles = [["F,WL,WT","F,WT","F,WT","F,WT,WR","",       "",       "",       "",       "",""],
-               ["SL,WL",   "F",   "F",   "F,WR",   "F,WL,WT","F,WR,WT","F,WL,WT","F,WR,WT","F,WL,WT",   "F,WR,WT"],
-               ["F,WL",   "F",   "F,L_0","F,DR_0","F,DL_0", "F,DR_1", "F,DL_1", "F,DR_2", "F,DL_2", "F,WR"],
-               ["F,WL",   "F",   "F,L_1","F,DR_0","F,DL_0", "F,DR_1", "F,DL_1", "F,DR_2", "F,DL_2", "SL,WR"],
-               ["F,WL",   "F",   "F,L_2","F,DR_0","F,DL_0", "F,DR_1", "F,DL_1", "F,DR_2", "F,DL_2", "F,WR"],
-               ["F,WL",   "F",   "F",   "F,WR",   "F,WL,WB", "F,WR,WB","F,WL,WB","F,WR,WB","F,WL,WB",   "F,WR,WB"],
-               ["F,WL,WB","F,WB","F,WB","F,WR,WB","",        "",       "",       "",       "",""]
+  map_tiles = [["", "F,WL,WT","F,WT","F,WT,WR","","","","","","","","F,WL,WT","F,WT","F,WT,WR"],
+               ["", "F,WL","F","F","F,WT,WR","","","","","F,SP_C1,WL,WT","PP_D1,F,SP_D1,WT","PP_E1,F,SP_E1","F","F,WR"],
+               ["", "F,WL","F","F","F","F,WT,WR","","F,SP_A2,WL,WT","F,SP_B2,WT","F,SP_C2","F,SP_D2","F,SP_E2","F","F,WR"],
+               ["", "F,WL","F","F","F","F","PP_0>OR_0,F,WT,WB","PP_A3>OR_0,F,SP_A3","PP_B3>OR_0,F,SP_B3","PP_C3>OR_1,F,SP_3","PP_D3>OR_2,F,SP_D3","PP_E3>OR_2,F,SP_E3","F","SL,WR"],
+               ["", "F,WL","F","F","F","F,WB,WR","","F,SP_A4,WL,WB","F,SP_B4,WB","PP_C4>OR_1,F,SP_C4","PP_D4>OR_2,F,SP_D4","F,SP_E4","F","F,WR"],
+               ["", "F,WL","F","F","F,WB,WR","","","","","F,SP_C5,WB,WL","F,SP_D5,WB","F,SP_E5","F","F,WR"],
+               ["", "F,WL,WB","F,WB","F,WB,WR","","","","","","","","F,WL,WB","F,WB","F,WB,WR"]
                ]
-  logic_blocks = []
-  player_coords = [3,3]
+  logic_blocks = ["OR_0>OR_3;OR_4;OR_5;SP_C4;SP_D4",
+                  "OR_1>OR_3;OR_4;OR_6",
+                  "OR_2>OR_3;OR_5;OR_6",
+                  "OR_3>SP_A2;SP_A4;SP_B2;SP_B4;SP_C1;SP_C5;SP_D5;SP_E2;SP_E5",
+                  "OR_4>SP_D3;SP_E3",
+                  "OR_5>SP_E4",
+                  "OR_6>SP_C2;SP_D1;SP_D2;SP_E1"]
+  player_coords = [10,28]
   def entities(self):
     entities = []
     return entities
@@ -81,15 +87,15 @@ class WinLevel:
     return entities
 
 class DeathLevel:
-  map_tiles = [["", "", "DF,DWL,DWT", "DF,DWT", "DF,DWT", "DF,DWT", "DF,DWT,DWR", "", ""],
-               ["", "DF,DWL,DWT", "DF,DWB","DF,DWB","DF","DF,DWB","DF,DWB", "DF,DWT,DWR", ""],
-               ["DF,DWL,DWT", "DF,DWR", "", "", "DF,DWL,DWR", "", "", "DF,DWL", "DF,DWT,DWR"],
-               ["DF,DWL", "DF","DF,DWT","DF,DWT","DF","DF,DWT","DF,DWT","DF","DF,DWR"],
-               ["DF,DWL,DWB","DF","DF","DF","DS","DF","DF","DF","DF,DWR,DWB"],
-               ["", "DF,DWL", "DF,DWB","DF","DF,DWB","DF","DF,DWB","DF,DWR"],
-               ["", "DF,DWL,DWR,DWB", "", "DF,DWL,DWR,DWB", "", "DF,DWL,DWR,DWB", "", "DF,DWL,DWR,DWB"]]
+  map_tiles = [["","","", "", "", "DF,DWL,DWT", "DF,DWT", "DF,DWT", "DF,DWT", "DF,DWT,DWR", "", ""],
+               ["","","","", "DF,DWL,DWT", "DF,DWB","DF,DWB","DF","DF,DWB","DF,DWB", "DF,DWT,DWR", ""],
+               ["","","","DF,DWL,DWT", "DF,DWR", "", "", "DF,DWL,DWR", "", "", "DF,DWL", "DF,DWT,DWR"],
+               ["","","","DF,DWL", "DF","DF,DWT","DF,DWT","DF","DF,DWT","DF,DWT","DF","DF,DWR"],
+               ["","","","DF,DWL,DWB","DF","DF","DF","DS","DF","DF","DF","DF,DWR,DWB"],
+               ["","","","", "DF,DWL", "DF,DWB","DF","DF,DWB","DF","DF,DWB","DF,DWR"],
+               ["","","","", "DF,DWL,DWR,DWB", "", "DF,DWL,DWR,DWB", "", "DF,DWL,DWR,DWB", "", "DF,DWL,DWR,DWB"]]
   logic_blocks = []
-  player_coords = [30,3]
+  player_coords = [60,5]
   def entities(self):
     entities = []
     return entities
