@@ -7,6 +7,7 @@ from level import Levels
 
 GAME_WIDTH = 120 # 15 Tiles 
 GAME_HEIGHT = 72 # 9 Tiles
+MAX_HEALTH = 1
 
 class Player(Entity):
   def __init__(self):
@@ -18,7 +19,7 @@ class Player(Entity):
     self.wallCollider = True
     self.imageX = [2]
     self.imageY = [0]
-    self.health = 1
+    self.health = MAX_HEALTH
 
   def damage(self,damage):
     if self.iFrames == 0:
@@ -34,6 +35,7 @@ class Player(Entity):
     heart_pos = [GAME_WIDTH - 8, 3]
     for i in range(self.health):
       # draw heart
+      pyxel.rect(heart_pos[0] - 1, heart_pos[1] - 2, 7, 7, 0)
       pyxel.rect(heart_pos[0], heart_pos[1], 5, 2, 8)
       pyxel.rect(heart_pos[0] + 1, heart_pos[1] + 2, 3, 1, 8)
       pyxel.rect(heart_pos[0] + 2, heart_pos[1] + 3, 1, 1, 8)
@@ -82,7 +84,7 @@ class App:
       self.levelCounter = -1
       self.loadLevel()
       self.levelComplete = False
-      self.player.health = 3
+      self.player.health = MAX_HEALTH
 
     if self.levelComplete:
       self.levelCounter += 1
