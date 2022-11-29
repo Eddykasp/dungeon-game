@@ -1,4 +1,5 @@
 from entities import *
+import random
 
 class Level1:
   map_tiles = [["F,WT,WL", "F,WT", "F,WT", "F,WT", "F,WT", "F,WT,WR", "F,WL,WT", "F,WT", "F,WT,DR_0", "F,WT,DL_0", "F,WT", "F,WT,WR"], 
@@ -74,6 +75,9 @@ class WinLevel:
     entities.append(Worm(5,5))
     entities.append(Worm(60,5))
     entities.append(Worm(5,50))
+    wormcount = 100
+    for i in range(wormcount):
+      entities.append(Worm(random.random()*120,random.random()*72)) 
     return entities
 
 class DeathLevel:
