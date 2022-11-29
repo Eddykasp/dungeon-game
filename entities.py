@@ -83,11 +83,15 @@ class Worm(Entity):
   collidedLastTick = False
   speed = 0.5
 
+  def __init__(self, x, y):
+      super().__init__(x, y)
+      self.color = int(r.random() * 16)
+
   def draw(self):
     if self.direction[1] != 0:
-      pyxel.rect(self.x - self.height / 2, self.y - self.width / 2, self.height, self.width, 4)
+      pyxel.rect(self.x - self.height / 2, self.y - self.width / 2, self.height, self.width, self.color)
     else:
-      pyxel.rect(self.x - self.width / 2, self.y - self.height / 2, self.width, self.height, 4)
+      pyxel.rect(self.x - self.width / 2, self.y - self.height / 2, self.width, self.height, self.color)
 
   def update(self, collision):
     choice = r.random()
