@@ -2,7 +2,6 @@ import pyxel
 from tiles import *
 from logicTiles import *
 from map import *
-import random as r
 from entities import *
 from level import Levels
 
@@ -128,5 +127,10 @@ class App:
     for entity in self.entities:
       entity.draw()
     self.player.draw()
+
+    # tutorial text
+    pyxel.rect(0,63,120,9,7)
+    pyxel.rect(0,64,120,7,0)
+    pyxel.text(7,65,"W,A,S,D: move | E: interact",7)
 
 App()
