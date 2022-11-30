@@ -35,7 +35,7 @@ class Player(Entity):
     heart_pos = [GAME_WIDTH - 8, 3]
     for i in range(self.health):
       # draw heart
-      pyxel.rect(heart_pos[0] - 1, heart_pos[1] - 2, 7, 7, 0)
+      # pyxel.rect(heart_pos[0] - 1, heart_pos[1] - 2, 7, 7, 0)
       pyxel.rect(heart_pos[0], heart_pos[1], 5, 2, 8)
       pyxel.rect(heart_pos[0] + 1, heart_pos[1] + 2, 3, 1, 8)
       pyxel.rect(heart_pos[0] + 2, heart_pos[1] + 3, 1, 1, 8)
