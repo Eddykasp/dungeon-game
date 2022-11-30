@@ -10,6 +10,12 @@ jobs:
   deploy:
 
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
     - uses: actions/checkout@v3
@@ -26,8 +32,13 @@ jobs:
       run: pyxel package . dungeon-game.py
     - name: build html
       run: pyxel app2html dungeon-game.pyxapp
-    - name: Archive html
-      uses: actions/upload-artifact@v3
+    - name: Setup Pages
+      uses: actions/configure-pages@v2
+    - name: Deploy html
+      uses: actions/upload-pages-artifact@v1
       with:
         name: game artifact
         path: dungeon-game.html
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v1
