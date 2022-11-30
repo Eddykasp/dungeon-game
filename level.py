@@ -5,9 +5,9 @@ class Level1:
   map_tiles = [["","","F,WT,WL", "F,WT", "F,WT", "F,WT", "F,WT,WR", "F,WL,WT", "F,WT", "F,WT,DR_0", "F,WT,DL_0", "F,WT", "F,WT,WR"], 
                ["","","SL,WL,WB", "F,WB", "F",    "F",    "F,WR",    "F,WL",    "F",    "F,DR_1",    "F,DL_1",    "F",    "F,WR"], 
                ["","","F,WL,WT", "F,WR,WT", "F,WL,SP_0", "F", "F,WR,SP_1", "F,WL", "F", "F,WR", "F,SP_5,WL", "PP_0>DEL_0,F,SP_6", "F,SP_7,WR"],
-               ["","","F,WL", "F,WR",    "F,WL", "F,SP_2", "F,WR", "F,WL", "F,L_0>DR_0;DL_0;DR_1;DL_1", "F,WR", "F,SP_8,WL", "PP_1>DEL_1,F,SP_9", "F,SP_10,WR"],
-               ["","","F,WL", "F,WR",    "F,WL,SP_3", "F", "F,WR,SP_4", "F,WL", "F", "F,WR", "F,SP_11,WL", "PP_2>DEL_2,F,SP_12", "F,SP_13,WR"],
-               ["","","F,WL", "F", "F", "F", "F", "F", "F", "F,WR", "F,WL", "F", "F,WR"],
+               ["","","F,WL", "F,WR,L_0>DR_0;DL_0;DR_1;DL_1",    "F,WL", "F,SP_2", "F,WR", "F,WL", "F,L_1>DB_0;DT_0;DB_1;DT_1", "F,WR", "F,SP_8,WL", "PP_1>DEL_1,F,SP_9", "F,SP_10,WR"],
+               ["","","F,WL,DB_0", "F,WR,DB_1",    "F,WL,SP_3", "F", "F,WR,SP_4", "F,WL", "F", "F,WR", "F,SP_11,WL", "PP_2>DEL_2,F,SP_12", "F,SP_13,WR"],
+               ["","","F,WL,DT_0", "F,DT_1", "F", "F", "F", "F", "F", "F,WR", "F,WL", "F", "F,WR"],
                ["","","F,WL,WB", "F,WB", "F,WB", "F,WB", "F,WB", "F,WB", "F,WB", "F,WR,WB", "F,WL,WB", "F,WB", "SL,WR,WB"]]
   logic_blocks = ["NOT_0>T_0", "T_0>SP_0;SP_1;SP_3;SP_4;NOT_1", "NOT_1>SP_2", "NOT_2>NOT_3", "NOT_3>SP_5;SP_7;SP_8;SP_10;SP_11;SP_13",
                  "DEL_0>SP_6", "DEL_1>SP_9", "DEL_2>SP_12"]
