@@ -57,9 +57,19 @@ class Level3:
     return entities
 
 class Level4:
-  map_tiles = [["F", "F", "F", "F", "SL"],[]]
-  logic_blocks = []
-  player_coords = [3,3]
+  map_tiles = [["","F,WL,WT,WB", "F,WT", "F,WT", "F,WT","F,WR,WT"],
+               ["", "", "F,L_0>OR_f0;OR_f1;OR_f2;OR_f3;NOT_f0,WL"   , "F",      "F",   "F,DR_1", "F,DL_1,SP_0,WR,WT"],
+               ["", "", "F,WL,WB", "F,DB_0", "F,WB","F,WB,WR", "F,WL,WR"],
+               ["", "", "F,WL,WT", "F,DT_0", "F,WT","F,WT,WR", "F,WL,SP_1,WR"],
+               ["", "", "F,WL", "F", "F,L_1>AND_1;OR_f0;OR_f1;NOT_f1;DB_3;DT_3","F,WR", "F,WL,WR"],
+               ["", "", "F,WL,WB", "F,DB_3", "F,WB","F,WB,WR", "F,WL,WB,SP_2", "F,WT,WB","F,SP_3,WT,WB","F,WT,WB","F,WT,WB", "SL,WB,WT,WR"],
+               ["", "", "F,WL,WT,L_2>DR_2;DL_2,WB", "F,WB,DT_3", "F,WT,WB","F,WT,DR_2,WB", "F,DL_2,L_3>OR_f0;OR_f2;OR_f4;NOT_f2,WT,WB,WR"]
+              ]
+  logic_blocks = ["NOT_f0>OR_f4", "NOT_f1>OR_f2;OR_f3;OR_f4", "NOT_f2>OR_f1;OR_f3",
+                  "OR_f0>AND_0", "OR_f1>AND_0","OR_f2>AND_0","OR_f3>AND_0","OR_f4>AND_0",
+                  "AND_0>DB_0;DT_0", "AND_1>DR_1;DL_1",
+                  "NOT_t>T_0", "T_0>SP_0;DEL_0", "DEL_0>SP_1;DEL_1", "DEL_1>SP_2;DEL_2", "DEL_2>SP_3"]
+  player_coords = [12,5]
   def entities(self):
     entities = []
     return entities
@@ -108,5 +118,5 @@ class DeathLevel:
     return entities
   
 class Levels:
-  levels = [Level1(), Level2(), Level3(), Level4(), Level5(), WinLevel(), DeathLevel()]
+  levels = [Level1(), Level2(), Level3(), Level4(), WinLevel(), DeathLevel()]
   
