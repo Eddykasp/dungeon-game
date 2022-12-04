@@ -58,7 +58,7 @@ class PressurePlate(Sensor):
       self.deactivate()
     return (0,0)
 
-class Lever(Sensor):
+class Lever(Sensor, Actuator):
   imageX = [3,4]
   imageY = [0,0]
 
@@ -66,6 +66,10 @@ class Lever(Sensor):
     if self.state == 0:
       self.activate()
     else:
+      self.deactivate()
+  
+  def updateState(self, inputSignal):
+    if inputSignal and self.state == 1:
       self.deactivate()
 
 class SpikeTrap(Actuator):
