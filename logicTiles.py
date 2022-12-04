@@ -8,7 +8,7 @@ class Actuator(Tile):
 
   def __init__(self, x, y, name):
       self.name = name
-      super().__init__(x,y)
+      super().__init__(x,y,name)
 
   def __str__(self):
     return self.name + " [" + str(self.state) + "]"
@@ -29,7 +29,7 @@ class Sensor(Tile):
 
   def __init__(self,x,y,name):
     self.name = name
-    super().__init__(x,y)
+    super().__init__(x,y,name)
 
   def __str__(self):
     return self.name + " > " + str(self.connectTo)

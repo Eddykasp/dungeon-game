@@ -29,17 +29,21 @@ class Map:
         logicTile.resetTick()
     for tileId in self.logicTiles:
       logicTile = self.logicTiles[tileId]
-      if not isinstance(logicTile,Actuator):
+      if isinstance(logicTile,Sensor) or isinstance(logicTile,LogicGate):
         try:
           # no sanity checking in logic network, if multiple things are hooked up
           # to the same receiver, the last one wins
           for connection in logicTile.connectTo:
             self.logicTiles[connection].updateState(logicTile.outputSignal)
-          #print(str(logicTile) + " " + str(logicTile.outputSignal) + " " + str(self.logicTiles[logicTile.connectTo]))
         except Exception as error:
           f = True
           print(self.logicTiles)
           print(str(logicTile.connectTo) + " is not defined in " + str(logicTile))
+          for connection in logicTile.connectTo:
+            self.logicTiles[connection].updateState(logicTile.outputSignal)
+            print(self.logicTiles[connection])
+      
+    # print("LOGIC TILES: \n" + str(self.logicTiles))
 
 
   """
@@ -80,7 +84,7 @@ class Map:
       return lever
     elif tile_id.startswith("A"):
       actuator = Actuator(row_index, col_index, tile_id)
-      self.logicTiles[tile_id] = actuator
+      self.id_to_connection(tile_id, actuator)
       return actuator
     elif tile_id.startswith("DR"):
       door = DoorRight(row_index, col_index, tile_id)
@@ -131,15 +135,15 @@ class Map:
     else:
       print(gate_id + " can't be parsed as a logic gate.")
 
-  def id_to_connection(self,logic_id,gate_or_sensor):
+  def id_to_connection(self,logic_id,logic_tile_gate):
     if ">" in logic_id:
       id, targets_str = logic_id.split(">")
       targets = targets_str.split(";")
-      gate_or_sensor.connectTo = targets
-      self.logicTiles[id] = gate_or_sensor
-      gate_or_sensor.name = id
+      logic_tile_gate.connectTo = targets
+      self.logicTiles[id] = logic_tile_gate
+      logic_tile_gate.name = id
     else:
-      self.logicTiles[logic_id] = gate_or_sensor
+      self.logicTiles[logic_id] = logic_tile_gate
     
 
   def load_map(self,map_spec, logic_gates):

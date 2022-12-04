@@ -8,9 +8,10 @@ class Tile:
   imageY = [0]
   state = 0
   
-  def __init__(self, x, y):
+  def __init__(self, x, y,name="TILE"):
     self.x = x
     self.y = y
+    self.name = name
 
   def draw(self):
     pyxel.blt(self.x* TILE_WIDTH,self.y* TILE_WIDTH,
