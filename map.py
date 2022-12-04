@@ -62,8 +62,9 @@ class Map:
       return WallBottom(row_index, col_index)
     elif tile_id == "WT":
       return WallTop(row_index, col_index)
-    elif tile_id == "DS":
-      return DeathStair(row_index, col_index)
+    elif tile_id.startswith("DS"):
+      _, level_id = tile_id.split("_")
+      return DeathStair(row_index, col_index, tile_id, level_id)
     elif tile_id == "DF":
       return DeathFloor(row_index, col_index) 
     elif tile_id == "DWR":
@@ -106,10 +107,12 @@ class Map:
       spikeTrap = SpikeTrap(row_index, col_index, tile_id)
       self.id_to_connection(tile_id, spikeTrap)
       return spikeTrap
-    elif tile_id == "SR":
-      return StairRight(row_index, col_index)
-    elif tile_id == "SL":
-      return StairLeft(row_index, col_index)  
+    elif tile_id.startswith("SR"):
+      _, level_id = tile_id.split("_")
+      return StairRight(row_index, col_index, tile_id, level_id)
+    elif tile_id.startswith("SL"):
+      _, level_id = tile_id.split("_")
+      return StairLeft(row_index, col_index, tile_id, level_id)  
     else:
       return Tile(row_index, col_index)
 

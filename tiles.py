@@ -61,8 +61,13 @@ class DeathFloor(Tile):
   imageY = [2]  
 
 class Stair(Tile):
+  def __init__(self, x, y, name, level_id):
+    self.level_id = level_id
+    super().__init__(x, y, name)
+
   def collision(self, sub_tile_x, sub_tile_y, width, height, app):
       app.levelComplete = True
+      app.level_id = self.level_id
       return super().collision(sub_tile_x, sub_tile_y, width, height, app)     
 
 class StairRight(Stair):

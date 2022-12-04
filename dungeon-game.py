@@ -48,7 +48,7 @@ class Player(Entity):
 class App:
   def __init__(self):
     self.player = Player()
-    self.levelCounter = 0
+    self.level_id = "1"
     self.levelComplete = False
     self.playerVulnerable = False
 
@@ -68,7 +68,7 @@ class App:
     pyxel.run(self.update, self.draw)
 
   def loadLevel(self):
-    level = Levels.levels[self.levelCounter]
+    level = Levels.levels[self.level_id]
     self.map = Map(GAME_WIDTH, GAME_HEIGHT, TILE_WIDTH)
     self.map.load_map(level.map_tiles, level.logic_blocks)     
     self.player.x = level.player_coords[0]
@@ -81,13 +81,12 @@ class App:
       self.playingMusic = True
     
     if self.player.health <= 0:
-      self.levelCounter = -1
+      self.level_id = "DEATH"
       self.loadLevel()
       self.levelComplete = False
       self.player.health = MAX_HEALTH
 
     if self.levelComplete:
-      self.levelCounter += 1
       self.loadLevel()
       self.levelComplete = False
 
