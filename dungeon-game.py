@@ -107,15 +107,15 @@ class App:
     player_movement = [0,0]
     if pyxel.btnp(pyxel.KEY_Q):
       pyxel.quit()
-    if pyxel.btnp(pyxel.KEY_RIGHT,hold=1,repeat=1) or pyxel.btnp(pyxel.KEY_D,hold=1,repeat=1):
+    if pyxel.btnp(pyxel.KEY_RIGHT,hold=1,repeat=1) or pyxel.btnp(pyxel.KEY_D,hold=1,repeat=1) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT,hold=1,repeat=1):
       player_movement[0] = 1
-    if pyxel.btnp(pyxel.KEY_LEFT,hold=1,repeat=1) or pyxel.btnp(pyxel.KEY_A,hold=1,repeat=1):
+    if pyxel.btnp(pyxel.KEY_LEFT,hold=1,repeat=1) or pyxel.btnp(pyxel.KEY_A,hold=1,repeat=1) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT,hold=1,repeat=1):
       player_movement[0] = -1
-    if pyxel.btnp(pyxel.KEY_UP,hold=1,repeat=1) or pyxel.btnp(pyxel.KEY_W,hold=1,repeat=1):
+    if pyxel.btnp(pyxel.KEY_UP,hold=1,repeat=1) or pyxel.btnp(pyxel.KEY_W,hold=1,repeat=1) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_UP,hold=1,repeat=1):
       player_movement[1] = -1
-    if pyxel.btnp(pyxel.KEY_DOWN,hold=1,repeat=1) or pyxel.btnp(pyxel.KEY_S,hold=1,repeat=1):
+    if pyxel.btnp(pyxel.KEY_DOWN,hold=1,repeat=1) or pyxel.btnp(pyxel.KEY_S,hold=1,repeat=1) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_DOWN,hold=1,repeat=1):
       player_movement[1] = 1
-    if pyxel.btnp(pyxel.KEY_E):
+    if pyxel.btnp(pyxel.KEY_E) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A):
       self.map.get_tile(self.player.x, self.player.y).interact()
 
     self.player.update(player_collision, player_movement)
