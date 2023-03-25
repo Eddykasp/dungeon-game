@@ -2,7 +2,7 @@ from entities import *
 import random
 
 class Level1:
-  map_tiles = [["","","F,WT,WL", "F,WT", "F,WT", "F,WT", "F,WT,WR", "F,WL,WT", "F,WT", "F,WT,DR_0", "F,WT,DL_0", "F,WT", "F,WT,WR"], 
+  map_tiles = [["","","F,WT,WL", "F,WT", "F,WT", "F,WT", "SL_1.1,WT,WR", "F,WL,WT", "F,WT", "F,WT,DR_0", "F,WT,DL_0", "F,WT", "F,WT,WR"], 
                ["","","F,WL,WB", "F,WB", "F",    "F",    "F,WR",    "F,WL",    "F",    "F,DR_1",    "F,DL_1",    "F",    "F,WR"], 
                ["","","F,WL,WT", "F,WR,WT", "F,WL,SP_0", "F", "F,WR,SP_1", "F,WL", "F", "F,WR", "F,SP_5,WL", "PP_0>DEL_0,F,SP_6", "F,SP_7,WR"],
                ["","","F,WL", "F,WR,L_0>DR_0;DL_0;DR_1;DL_1",    "F,WL", "F,SP_2", "F,WR", "F,WL", "F,L_1>DB_0;DT_0;DB_1;DT_1", "F,WR", "F,SP_8,WL", "PP_1>DEL_1,F,SP_9", "F,SP_10,WR"],
@@ -11,6 +11,15 @@ class Level1:
                ["","","F,WL,WB", "F,WB", "F,WB", "F,WB", "F,WB", "F,WB", "F,WB", "F,WR,WB", "F,WL,WB", "F,WB", "SL_2,WR,WB"]]
   logic_blocks = ["NOT_0>T_0", "T_0>SP_0;SP_1;SP_3;SP_4;NOT_1", "NOT_1>SP_2", "NOT_2>NOT_3", "NOT_3>SP_5;SP_7;SP_8;SP_10;SP_11;SP_13",
                  "DEL_0>SP_6", "DEL_1>SP_9", "DEL_2>SP_12"]
+  player_coords = [20,5]
+  def entities(self):
+    entities = []
+    return entities
+
+class Level1_1:
+  map_tiles = [["", "", "F,WT,WL", "F,WT", "SL_1,WT,WR"],
+               ["", "", "F,WL,WB", "F,WB", "F,WB,WR"]]
+  logic_blocks = []
   player_coords = [20,5]
   def entities(self):
     entities = []
@@ -111,5 +120,5 @@ class DeathLevel:
   
 class Levels:
   levels = {"1": Level1(), "2": Level2(), "3": Level3(), "4": Level4(), 
-            "WIN": WinLevel(), "DEATH": DeathLevel()}
+            "WIN": WinLevel(), "DEATH": DeathLevel(), "1.1": Level1_1()}
   
